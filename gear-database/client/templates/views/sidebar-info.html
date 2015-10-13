@@ -1,0 +1,37 @@
+<template name="sidebarInfo">
+  <column class="content-padded gear-info grow">
+    <row class="sidebar-header">
+      <column class="header-title">
+        {{code}} Info
+      </column>
+    </row>
+    <column>
+      <dl>
+        <dt class="code huge-type">
+          {{code}}
+        </dt>
+        <dd>Equipment Name</dd>
+        <dt class="name field big-type">
+          {{name}}
+        </dt>
+        <dd>Description</dd>
+        <dt class="description field med-type">
+          <p>{{description}}</p>
+        </dt>
+        <dd>Condition</dd>
+        <dt class="condition field med-type">
+          {{conditionString}}
+          {{> starRating rating=condition max=5}}
+        </dt>
+        <dd>Notes</dd>
+        <dt class="activity field">
+          {{notes}}
+        </dt>
+        <dd>Activity</dd>
+        <dt class="activity field">
+          {{getActivity}}
+        </dt>
+      </dl>
+    </column>
+  </column>
+</template>

@@ -1,0 +1,89 @@
+@screen-sm: 1024px;
+
+//Override or add extra styling for standard bootstrap alert boxes
+ul.notifications {
+    z-index: 10001 !important;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    list-style-type: none;
+    .display(flex);
+    .flex-direction(column-reverse);
+    .align-items(flex-end);
+    padding: 0;
+    width: 600px;
+    @media(max-width: @tablet-width) {
+        width: 80%;
+    }
+}
+
+li.notification {
+    border-radius: 3px;
+    padding: 10px;
+    padding-right: 35px;
+    margin: 10px;
+    color: white;
+    position: relative;
+    .box-shadow(@shadow4);
+    a {
+        &, &:hover, &:visited {
+            color: white;
+        }
+    }
+    &.error {
+        background-color: @roc-red;
+    }
+    &.warning {
+        background-color: #DF7B0C;
+    }
+    &.info {
+        background-color: @roc-blue;
+    }
+    &.success {
+        background-color: @roc-forest;
+    }
+    & div.title {
+        top: 0;
+        font-weight: 400;
+        font-size: 1.3em;
+        margin: 5px 0;
+    }
+    & div.message {
+        bottom: 0;
+        color: @tint4;
+        vertical-align: middle;
+        a {
+            text-decoration: underline !important;
+        }
+    }
+    & div.closeButton {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      position:absolute;
+      .center-content;
+      width: 25px;
+      background: @shade1;
+      font-weight: bold;
+      font-size: 20px;
+      &:hover {
+        background: @shade2;
+      }
+    }
+
+    &.closeable {
+      cursor:pointer;
+    }
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.notifications li.notification.notificationHidden {
+  display: none;
+  visibility: visible;
+}

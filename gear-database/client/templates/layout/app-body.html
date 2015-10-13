@@ -1,0 +1,61 @@
+<head>
+  <meta charset="utf-8">
+  <title>ROC</title>
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, minimal-ui, maximum-scale=1, minimum-scale=1" />
+</head>
+
+<template name="ApplicationLayout">
+<column id="app-body" class="{{activeModalClass}}">
+  <header class="app-navbar">
+    {{> appNavigation}}
+  </header>
+  <row class="app-toolbar">
+    
+  </row>
+  <row id="app-main">
+  	<aside id="leftSidebar" class="sidebar sidebar-left resizable-width {{sidebarClass 'leftSidebar'}}">
+      <div class="content">{{> yield 'left'}}</div>
+      <div class="resize-width-handle right-side"></div>
+  	</aside>
+  	<article class="app-content grow">
+      <div class="content">
+        {{> yield}}
+      </div>
+  	</article>
+    <aside id="rightSidebar" class="sidebar sidebar-right resizable-width {{sidebarClass 'rightSidebar'}}">
+      <div class="content">{{> yield 'right'}}</div>
+      <div class="resize-width-handle left-side"></div>
+      <button class="btn-nostyle btn-icon close-sidebar close-sidebar-button" data-sidebar-id="rightSidebar">
+        <img src="/images/times.svg" alt="">
+      </button>
+    </aside>
+  </row>
+  <footer>
+  	{{> queue}}
+  	{{>yield 'footer'}}
+  </footer>
+</column>
+{{> tooltips}}
+{{> notifications}}
+{{> modal}}
+</template>
+
+<template name="NoSidebarLayout">
+<column id="app-body">
+  <header>
+    {{> appNavigation}}
+  </header>
+  <row id="app-main">
+    <article class="app-content grow">
+      {{> yield}}
+    </article>
+  </row>
+  <footer>
+    {{> queue}}
+    {{>yield 'footer'}}
+  </footer>
+</column>
+{{> tooltips}}
+{{> notifications}}
+{{> modal}}
+</template>

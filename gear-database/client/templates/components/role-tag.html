@@ -1,0 +1,7 @@
+<template name="roleTag">
+  {{#if isInRole 'admin,officer,chair,leader'}}
+  <div class="role-tag {{roleTitle}}">
+    <i class="fa fa-shield"></i> {{roleTitle}}
+  </div>
+  {{/if}}
+</template>

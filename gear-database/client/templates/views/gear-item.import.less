@@ -1,0 +1,78 @@
+@default: @roc-gray;
+@read: @roc-gray;
+@edit: #E90;
+@queue: #35B;
+@rented: @roc-red;
+
+
+.gear-item {
+  position: relative;
+  background: @default;
+  margin: 10px;
+  cursor: pointer;
+  .transition(background-color .2s);
+  .border-radius(2px);
+  .flex(1 0 220px);
+  // max-width: 300px;
+  .box-shadow(0 1px 2px @shade2);
+
+  .animation(fadeIn .5s);
+
+  &.edit {  border-right: 2px solid @edit;}
+  &.queue { background: @queue;}
+  &.rented {
+    background: fade(@read, 25%);
+    cursor: default;
+  }
+
+  &:hover .icon-group {
+    opacity: .75;
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .icon-group {
+    opacity: 0;
+    transition: .2s;
+  }
+  .gear-code, .gear-code-input {
+    padding: 10px;
+    font-size: 24px;
+    .type-light;
+    background-color: transparent;
+    color: white;
+  }
+  .gear-name, .gear-name-input {
+    padding: 5px 10px;
+    .type-light;
+    .ellipsized;
+  }
+  .gear-description, .gear-description-input {
+    padding: 10px;
+    max-width: 100%;
+    font-size: 12px;
+  }
+}
+
+span.highlight {
+  padding: 0 3px;
+  margin: 0 -3px;
+  background: @tint2;
+}
+
+.error {
+  background: @roc-red !important;
+}
+
+.icon-group {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+
+  button {
+    color: white;
+    margin: 0;
+  }
+}

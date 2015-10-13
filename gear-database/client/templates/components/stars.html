@@ -1,0 +1,11 @@
+<template name="starRating">
+	<row class="star-rating {{conditionClass}}">
+		{{#if showStars}}
+      {{#each stars}}
+  			<div class="condition-bar {{class}}"></div>
+  		{{/each}}
+    {{else }}
+      {{rating}}
+    {{/if}}
+	</row>
+</template>

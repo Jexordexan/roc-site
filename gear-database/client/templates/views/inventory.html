@@ -1,0 +1,24 @@
+<template name="inventory">
+  <column class="page">
+    <row class="result-filters">
+      <h2 class="result-filter {{activeFilter 'gear'}}" data-filter="gear">Gear</h2>
+      <h2 class="result-filter {{activeFilter 'members'}}" data-filter="members">Members</h2>
+    </row>
+    {{#if filteredBy 'gear'}}
+      <div class="result-list wrap justify-start">
+        {{#each gear}}
+          {{> gearItem}}
+        {{/each}}
+      </div>
+    {{/if}}
+    {{#if filteredBy 'members'}}
+      <row class="result-list">
+        {{#each members}}
+          <div>
+            <h3>{{profile.firstName}} {{profile.lastName}}</h3>
+          </div>
+        {{/each}}
+      </row>
+    {{/if}}
+  </column>
+</template>

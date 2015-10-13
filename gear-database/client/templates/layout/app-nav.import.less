@@ -1,0 +1,55 @@
+header {
+	position: relative;
+	background: @roc-gray;
+	.box-shadow(0 2px 5px @shade2);
+	z-index: 3;
+}
+
+header, nav, .nav-button {
+	.display(flex);
+  .justify-content(space-between);
+}
+
+.nav-logo {
+	padding: 5px;
+	height: 50px;
+}
+
+.nav-link {
+	.center-content;
+	padding: 10px;
+	color: @roc-snow;
+	text-decoration: none;
+
+	&:hover {
+		background: @tint1;
+	}
+}
+
+#login-buttons {
+	.center-content;
+	margin-right: 10px;
+}
+
+#login-dropdown-list {
+	position: absolute;
+	top: 50px; right: 10px;
+	z-index: 10;
+	background: #BBB;
+
+	* {
+		color: @roc-gray;
+	}
+}
+
+.nav-left,
+.nav-center,
+.nav-right {
+  .display-row;
+	.align-items(center);
+	position: relative;
+}
+
+.nav-center {
+  margin: 0 auto;
+}

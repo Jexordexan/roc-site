@@ -1,0 +1,49 @@
+<template name="appNavigation">
+  <div class="nav-left">
+    <img class="nav-logo" src="http://www.outing.org/images/badge_small.png" alt="">
+  </div>
+  <div class="nav-center">
+    {{> searchBox}}
+  </div>
+	<!-- <nav id="app-nav" class="navbar">
+    <div class="nav-button">
+      <a href="{{pathFor 'inventory'}}" class="nav-link">Inventory</a>
+    </div>
+		<div class="nav-button">
+			<a href="{{pathFor 'inventory.add'}}" class="nav-link">Add Gear</a>
+		</div>
+	</nav> -->
+  <row class="nav-right">
+    {{> accountButtons}}
+  </row>
+</template>
+
+<template name="accountButtons">
+  {{#if currentUser}}
+    {{#dropdown name="userMenu" align="right"}}
+      <ul class="dropdown-list">
+        <a href="/signout" class="action-item">
+          Sign Out
+        </a>
+      </ul>
+    {{/dropdown}}
+    <div class="button-group">
+      <a href="{{pathFor 'account'}}" class="btn nav-link">
+        {{currentUser.profile.firstName}}
+      </a>
+      {{#dropdownTrigger name="userMenu"}}
+        <a href="{{pathFor 'account'}}" class="btn btn-icon">
+          <i class="fa fa-fw fa-caret-down"></i>
+        </a>
+      {{/dropdownTrigger}}
+    </div>
+  {{else}}
+    <button class="btn-info modal" data-modal-template="signInUp">
+      Sign In
+    </button>
+    OR
+    <button class="btn-primary modal" data-modal-template="signInUp">
+      Join the Club
+    </button>
+  {{/if}}
+</template>

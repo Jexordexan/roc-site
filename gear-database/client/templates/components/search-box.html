@@ -1,0 +1,30 @@
+<template name="searchBox">
+	<row class="app-nav-search justify-center grow">
+    {{#dropdownTrigger name="searchFilters"}}
+      <label for="search-input" class="search-icon {{#if dropdownIsActive 'searchFilters'}}dropdown--open{{/if}}">
+        {{#if isLoading}}
+          <i class="fa fa-fw fa-circle-o-notch fa-spin loading-spinner"></i>
+        {{else}}
+            <i class="fa fa-fw fa-{{activeFilter.icon}}"></i>
+            <i class="fa fa-caret-down"></i>
+        {{/if}}
+      </label>
+      {{#dropdown name="searchFilters" align="left"}}
+        <ul class="dropdown-list">
+          {{#each searchFilter}}
+          <li class="action-item {{activeClass}}">
+            <i class="action-item-icon fa fa-fw fa-{{icon}}"></i>
+            <span class="action-item-label">{{label}}</span>
+          </li>
+          {{/each}}
+        </ul>
+      {{/dropdown}}
+    {{/dropdownTrigger}}
+		<row class="search-box grow">
+			<input type="text" id="search-input" placeholder="{{activeFilter.label}}" class="{{isDirty}} grow">
+			<button class="btn-nostyle clear-search">
+				&times;
+			</button>
+		</row>
+	</row>
+</template>

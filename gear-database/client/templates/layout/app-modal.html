@@ -1,0 +1,18 @@
+<template name="modal">
+  <div class="modal-container {{modalClass}}">
+    <div class="modal-backdrop close-modal">
+      
+    </div>
+    <column class="modal-content">
+      <button class="btn-nostyle btn-icon close-modal close-modal-button">
+        <img src="/images/times.svg" alt="">
+      </button>
+      {{#if activeModal}}
+        {{> Template.dynamic template=activeModal}}
+      {{/if}}
+    </column>
+  </div>
+</template>
+
+
+

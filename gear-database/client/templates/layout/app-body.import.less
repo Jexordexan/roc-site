@@ -1,0 +1,97 @@
+#app-main {
+  position: relative;
+	.flex(1);
+}
+
+aside, article, footer {
+	.display(flex);
+	.flex-direction(column);
+	overflow: hidden;
+
+  > .content {
+    .flex(1);
+    overflow: auto;
+  }
+  .content-padded {
+    padding: 20px;
+  }
+}
+
+aside {
+	.flex-shrink(0);
+  max-width: 100vw;
+  .box-shadow(2px 0 5px -2px @shade2, -2px 0 5px -2px @shade2);
+
+  &.closed {
+    transition: all .25s cubic-bezier(.15,1,.85,1);
+    opacity: 0;
+    width: 0 !important;
+  }
+
+  &.open {
+    // .animation(grow-in .5s cubic-bezier(.15,1,.85,1));
+    width: 300px;
+  }
+}
+
+.sidebar {
+  background: #222;
+}
+
+#rightSidebar {
+  // .position(absolute, 0, 0, 0);
+}
+
+.close-sidebar-button {
+  .position(absolute, 0, 0);
+  z-index: 5;
+}
+
+.resizable-width {
+  position: relative;
+}
+
+.resize-width-handle {
+  background-color: transparent;
+  border: 0 solid @tone2;
+  width: 5px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  cursor: ew-resize;
+
+  &.right-side {
+    right: 0;
+    border-right-width: 1px;
+  }
+  &.left-side {
+    left: 0;
+    border-left-width: 1px;
+  }
+}
+
+.page {
+  margin: 20px auto;
+  width: 100%;
+  max-width: 800px;
+  background: @tone1;
+  .page-title {
+    padding: 15px;
+    border-bottom: 1px solid @tone1;
+  }
+
+  .page-content {
+    padding: 20px;
+  }
+}
+
+@media(max-width: @tablet-width) {
+  #rightSidebar {
+    .position(absolute, 0, 0, 0);
+    z-index: @sidebar-z;
+  }
+}
+
+
+
+

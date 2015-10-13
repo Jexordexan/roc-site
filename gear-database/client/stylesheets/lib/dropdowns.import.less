@@ -1,0 +1,111 @@
+.dropdown {
+  @arrow-size: 10px;
+  @dropdown-color: rgba(255,255,255,.9);
+
+  z-index: 1001;
+  opacity: 0;
+  font-weight: 500;
+  max-width: 300px;
+  min-width: 100px;
+  background-color: @dropdown-color;
+  // text-transform: uppercase;
+  border-radius: 3px;
+  margin: @arrow-size 0;
+  color: #111;
+
+  &.hide {
+    opacity: 0;
+  }
+
+  &.show {
+    opacity: 1;
+  }
+
+  // CSS arrow
+  .dropdown__arrow {
+    content: "";
+    display: block;
+    bottom: -@arrow-size*2;
+    left: 50%;
+    .transform(translate(-50%, 0));
+    width: 0;
+    height: 0;
+    border: @arrow-size solid;
+    border-color: @dropdown-color transparent transparent;
+    position: absolute;
+  }
+
+  .dropdown__arrow--right {
+    box-shadow: @shade1 -1px 1px 1px;
+    right: -@arrow-size*2;
+    left: auto;
+    bottom: calc(50% - @arrow-size);
+    border-color: transparent transparent transparent @dropdown-color;
+  }
+
+  .dropdown__arrow--left {
+    box-shadow: @shade1 1px 1px 1px;
+    left: -@arrow-size*2;
+    bottom: calc(50% - @arrow-size);
+    border-color: transparent @dropdown-color transparent transparent;
+  }
+
+  .dropdown__arrow--up {
+    top: -@arrow-size*2;
+    bottom: auto;
+    border-color: transparent transparent @dropdown-color transparent;
+  }
+
+  &[data-dropdown-align="right"] .dropdown__arrow {
+    right: 0;
+    left: auto;
+  }
+
+  &[data-dropdown-align="left"] .dropdown__arrow {
+    left: 20px;
+  }
+}
+
+.dropdown__trigger, .action-item {
+  cursor: pointer;
+}
+
+.dropdown-list {
+  .display-col();
+  border-radius: inherit;
+  overflow: hidden;
+
+  .divider {
+    height: 0;
+    border-top: 1px solid @shade2;
+    margin: 3px 10px;
+  }
+  .action-item {
+    padding: 5px 20px;
+    color: inherit;
+    text-decoration: none !important;
+    .font-s2;
+
+    &.selected {
+      color: @roc-blue;
+      .action-item-label:after {
+        content: '✓';
+        margin-left: 10px;
+        margin-right: -10px;
+        float: right;
+      }
+    }
+    &:hover {
+      background: @roc-blue;
+      color: @roc-white;
+    }
+  }
+  .action-item-icon {
+    display: inline-block;
+    margin-left: -10px;
+    margin-right: 10px;
+    width: 20px;
+    font-size: 16px;
+  }
+
+}

@@ -1,0 +1,44 @@
+<template name="checkout">
+  <row class="modal-header">
+    <h2>Checkout</h2>
+  </row>
+  <row class="modal-body column-tablet">
+    <column class="checkout-list grow">
+      {{#each selectedGear}}
+        <row>
+          {{> gearItem}}
+        </row>
+      {{/each}}
+    </column>
+    <column class="checkout-info grow">
+      <form action="#" id="checkoutForm" class="checkout-form column">
+        <div class="form-group">
+          <label class="control-label" for="renterSelect">Renter</label>
+          <select name="userId" id="renterSelect" class="form-control">
+            {{#each members}}
+              <option value="{{_id}}">{{emailOrName}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="intervalSelect">Due back in</label>
+          <select name="dueInterval" id="intervalSelect" class="form-control">
+            {{#each intervals}}
+              <option value="{{value}}">{{name}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="intervalSelect">Notes</label>
+          <textarea name="notes" id="notes" cols="30" rows="3" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+          <button class="btn-primary" type="submit">Checkout</button>
+        </div>
+      </form>
+    </column>
+  </row>
+  <row class="modal-footer">
+    
+  </row>
+</template>

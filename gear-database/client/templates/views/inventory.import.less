@@ -1,0 +1,20 @@
+.result-list {
+	// .flex(1);
+	.align-items(flex-start);
+	.align-content(flex-start);
+	overflow: auto;
+	padding: 5px;
+}
+.result-fitlers {
+  padding: 0;
+}
+
+.result-filter {
+  padding: 10px;
+  border-bottom: 2px solid @tone1;
+  transition: all .25s;
+  &.active {
+    border-bottom-color: @roc-blue;
+  }
+}
+

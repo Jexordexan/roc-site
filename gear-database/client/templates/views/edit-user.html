@@ -1,0 +1,11 @@
+<template name="editUser">
+
+<div class="page">
+  <div class="page-title">
+    <h2>Edit User</h2>
+  </div>
+  <div class="page-content">
+    {{> quickForm collection=UsersCollection doc=currentProfile id="editUserForm" type="update"}}
+  </div>
+</div>
+</template>
