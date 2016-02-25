@@ -2,85 +2,89 @@
 
 //Override or add extra styling for standard bootstrap alert boxes
 ul.notifications {
-    z-index: 10001 !important;
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    list-style-type: none;
-    .display(flex);
-    .flex-direction(column-reverse);
-    .align-items(flex-end);
-    padding: 0;
-    width: 600px;
-    @media(max-width: @tablet-width) {
-        width: 80%;
-    }
+  position: fixed;
+  z-index: 10001 !important;
+  top: 10px;
+  right: 10px;
+  width: 600px;
+  padding: 0;
+  list-style-type: none;
+
+  .display(flex);
+  .flex-direction(column-reverse);
+  .align-items(flex-end);
+  @media(max-width: @tablet-width) {
+    width: 80%;
+  }
 }
 
 li.notification {
-    border-radius: 3px;
-    padding: 10px;
-    padding-right: 35px;
-    margin: 10px;
-    color: white;
-    position: relative;
-    .box-shadow(@shadow4);
+  position: relative;
+  margin: 10px;
+  padding: 10px;
+  padding-right: 35px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  color: white;
+  border-radius: 3px;
+
+  .box-shadow(@shadow4);
+  -webkit-touch-callout: none;
+   -khtml-user-select: none;
+  a {
+    &,
+    &:hover,
+    &:visited {
+      color: white;
+    }
+  }
+  &.error {
+    background-color: @roc-red;
+  }
+  &.warning {
+    background-color: #DF7B0C;
+  }
+  &.info {
+    background-color: @roc-blue;
+  }
+  &.success {
+    background-color: @roc-forest;
+  }
+  & div.title {
+    top: 0;
+    margin: 5px 0;
+    font-size: 1.3em;
+    font-weight: 400;
+  }
+  & div.message {
+    bottom: 0;
+    vertical-align: middle;
+    color: @tint4;
     a {
-        &, &:hover, &:visited {
-            color: white;
-        }
+      text-decoration: underline !important;
     }
-    &.error {
-        background-color: @roc-red;
-    }
-    &.warning {
-        background-color: #DF7B0C;
-    }
-    &.info {
-        background-color: @roc-blue;
-    }
-    &.success {
-        background-color: @roc-forest;
-    }
-    & div.title {
-        top: 0;
-        font-weight: 400;
-        font-size: 1.3em;
-        margin: 5px 0;
-    }
-    & div.message {
-        bottom: 0;
-        color: @tint4;
-        vertical-align: middle;
-        a {
-            text-decoration: underline !important;
-        }
-    }
-    & div.closeButton {
-      top: 0;
-      right: 0;
-      bottom: 0;
-      position:absolute;
-      .center-content;
-      width: 25px;
-      background: @shade1;
-      font-weight: bold;
-      font-size: 20px;
-      &:hover {
-        background: @shade2;
-      }
-    }
+  }
+  & div.closeButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 25px;
+    font-size: 20px;
+    font-weight: bold;
+    background: @shade1;
 
-    &.closeable {
-      cursor:pointer;
+    .center-content;
+    &:hover {
+      background: @shade2;
     }
+  }
 
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+  &.closeable {
+    cursor: pointer;
+  }
 }
 
 .notifications li.notification.notificationHidden {

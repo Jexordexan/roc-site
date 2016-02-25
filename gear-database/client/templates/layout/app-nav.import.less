@@ -1,53 +1,60 @@
 header {
-	position: relative;
-	background: @roc-gray;
-	.box-shadow(0 2px 5px @shade2);
-	z-index: 3;
+  position: relative;
+  z-index: 3;
+  background: @roc-gray;
+
+  .box-shadow(0 2px 5px @shade2);
 }
 
-header, nav, .nav-button {
-	.display(flex);
+header,
+nav,
+.nav-button {
+  .display(flex);
   .justify-content(space-between);
 }
 
 .nav-logo {
-	padding: 5px;
-	height: 50px;
+  height: 50px;
+  padding: 5px;
 }
 
 .nav-link {
-	.center-content;
-	padding: 10px;
-	color: @roc-snow;
-	text-decoration: none;
+  padding: 10px;
+  text-decoration: none;
+  color: @roc-snow;
 
-	&:hover {
-		background: @tint1;
-	}
+  .center-content;
+
+  &:hover {
+    background: @tint1;
+  }
 }
 
 #login-buttons {
-	.center-content;
-	margin-right: 10px;
+  margin-right: 10px;
+
+  .center-content;
 }
 
 #login-dropdown-list {
-	position: absolute;
-	top: 50px; right: 10px;
-	z-index: 10;
-	background: #BBB;
+  position: absolute;
+  z-index: 10;
+  top: 50px;
+  right: 10px;
+  background: #BBB;
 
-	* {
-		color: @roc-gray;
-	}
+  * {
+    color: @roc-gray;
+  }
 }
 
 .nav-left,
 .nav-center,
 .nav-right {
+  position: relative;
+
   .display-row;
-	.align-items(center);
-	position: relative;
+  .align-items(center);
 }
 
 .nav-center {

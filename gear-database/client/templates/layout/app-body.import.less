@@ -1,16 +1,21 @@
 #app-main {
   position: relative;
-	.flex(1);
+
+  .flex(1);
 }
 
-aside, article, footer {
-	.display(flex);
-	.flex-direction(column);
-	overflow: hidden;
+aside,
+article,
+footer {
+  overflow: hidden;
+
+  .display(flex);
+  .flex-direction(column);
 
   > .content {
-    .flex(1);
     overflow: auto;
+
+    .flex(1);
   }
   .content-padded {
     padding: 20px;
@@ -18,14 +23,15 @@ aside, article, footer {
 }
 
 aside {
-	.flex-shrink(0);
   max-width: 100vw;
+
+  .flex-shrink(0);
   .box-shadow(2px 0 5px -2px @shade2, -2px 0 5px -2px @shade2);
 
   &.closed {
+    width: 0 !important;
     transition: all .25s cubic-bezier(.15,1,.85,1);
     opacity: 0;
-    width: 0 !important;
   }
 
   &.open {
@@ -43,8 +49,9 @@ aside {
 }
 
 .close-sidebar-button {
-  .position(absolute, 0, 0);
   z-index: 5;
+
+  .position(absolute, 0, 0);
 }
 
 .resizable-width {
@@ -52,13 +59,13 @@ aside {
 }
 
 .resize-width-handle {
-  background-color: transparent;
-  border: 0 solid @tone2;
-  width: 5px;
   position: absolute;
   top: 0;
   bottom: 0;
+  width: 5px;
   cursor: ew-resize;
+  border: 0 solid @tone2;
+  background-color: transparent;
 
   &.right-side {
     right: 0;
@@ -71,9 +78,9 @@ aside {
 }
 
 .page {
-  margin: 20px auto;
   width: 100%;
   max-width: 800px;
+  margin: 20px auto;
   background: @tone1;
   .page-title {
     padding: 15px;
@@ -87,11 +94,8 @@ aside {
 
 @media(max-width: @tablet-width) {
   #rightSidebar {
-    .position(absolute, 0, 0, 0);
     z-index: @sidebar-z;
+
+    .position(absolute, 0, 0, 0);
   }
 }
-
-
-
-

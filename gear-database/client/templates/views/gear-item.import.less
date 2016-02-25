@@ -7,22 +7,26 @@
 
 .gear-item {
   position: relative;
-  background: @default;
   margin: 10px;
   cursor: pointer;
+  background: @default;
+
   .transition(background-color .2s);
   .border-radius(2px);
   .flex(1 0 220px);
   // max-width: 300px;
   .box-shadow(0 1px 2px @shade2);
-
   .animation(fadeIn .5s);
 
-  &.edit {  border-right: 2px solid @edit;}
-  &.queue { background: @queue;}
+  &.edit {
+    border-right: 2px solid @edit;
+  }
+  &.queue {
+    background: @queue;
+  }
   &.rented {
-    background: fade(@read, 25%);
     cursor: default;
+    background: fade(@read, 25%);
   }
 
   &:hover .icon-group {
@@ -33,31 +37,36 @@
   }
 
   .icon-group {
-    opacity: 0;
     transition: .2s;
+    opacity: 0;
   }
-  .gear-code, .gear-code-input {
+  .gear-code,
+  .gear-code-input {
     padding: 10px;
     font-size: 24px;
-    .type-light;
-    background-color: transparent;
     color: white;
+    background-color: transparent;
+
+    .type-light;
   }
-  .gear-name, .gear-name-input {
+  .gear-name,
+  .gear-name-input {
     padding: 5px 10px;
+
     .type-light;
     .ellipsized;
   }
-  .gear-description, .gear-description-input {
-    padding: 10px;
+  .gear-description,
+  .gear-description-input {
     max-width: 100%;
+    padding: 10px;
     font-size: 12px;
   }
 }
 
 span.highlight {
-  padding: 0 3px;
   margin: 0 -3px;
+  padding: 0 3px;
   background: @tint2;
 }
 
@@ -67,12 +76,12 @@ span.highlight {
 
 .icon-group {
   position: absolute;
+  z-index: 2;
   top: 0;
   right: 0;
-  z-index: 2;
 
   button {
-    color: white;
     margin: 0;
+    color: white;
   }
 }

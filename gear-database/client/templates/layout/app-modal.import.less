@@ -1,13 +1,15 @@
 .modal-container {
-  .position(fixed,0,0,0,0);
-  .center-content;
+  z-index: @modal-z;
   overflow-y: auto;
   transition: opacity .5s, visibility .5s;
-  z-index: @modal-z;
+
+  .position(fixed,0,0,0,0);
+  .center-content;
 
   .modal-backdrop {
-    .position(fixed,0,0,0,0);
     background: @shade3;
+
+    .position(fixed,0,0,0,0);
   }
 
   &.modal-opened .modal-content {
@@ -20,9 +22,9 @@
   }
 
   &.modal-closed {
-    opacity: 0;
-    visibility: hidden;
     z-index: -99;
+    visibility: hidden;
+    opacity: 0;
     // visibility: hidden;
   }
 
@@ -36,7 +38,7 @@
     box-shadow: @shadow5;
 
     .close-modal-button {
-      .position(absolute, -40px, -40px)
+      .position(absolute, -40px, -40px);
     }
 
     .modal-header {
@@ -46,6 +48,7 @@
 
     .modal-body {
       padding: 15px;
+
       .flex-grow(1);
     }
 
