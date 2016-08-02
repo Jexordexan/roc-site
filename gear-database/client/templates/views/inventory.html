@@ -1,8 +1,10 @@
 <template name="inventory">
   <column class="page">
     <row class="result-filters">
-      <h2 class="result-filter {{activeFilter 'gear'}}" data-filter="gear">Gear</h2>
-      <h2 class="result-filter {{activeFilter 'members'}}" data-filter="members">Members</h2>
+      <a class="clean result-filter {{activeFilter 'gear'}}" href="{{pathFor route='inventory' query='show=gear'}}">Gear</a>
+      <a class="clean result-filter {{activeFilter 'members'}}" href="{{pathFor route='inventory' query='show=members'}}">Members</a>
+      <a class="clean result-filter {{isLimit '10'}}" data-limit="10">10</a>
+      <a class="clean result-filter {{isLimit '20'}}" data-limit="20">20</a>
     </row>
     {{#if filteredBy 'gear'}}
       <div class="result-list wrap justify-start">
@@ -14,9 +16,9 @@
     {{#if filteredBy 'members'}}
       <row class="result-list">
         {{#each members}}
-          <div>
+          <row>
             <h3>{{profile.firstName}} {{profile.lastName}}</h3>
-          </div>
+          </row>
         {{/each}}
       </row>
     {{/if}}

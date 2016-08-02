@@ -1,11 +1,11 @@
-SearchSource.defineSource('gear', function(searchText, options) {
-  var options = {sort: {updated: -1}, limit: 20};
+SearchSource.defineSource('gear', (searchText, options) => {
+  options = options || {sort: {updated: -1}, limit: 20};
 
   if(searchText) {
-    var terms = splitByComma(searchText);
-    var matchByOrder = fuzzyMatch(terms);
-    var matchBySequence = exactMatch(terms);
-    var selector = {$or: [
+    const terms = splitByComma(searchText);
+    const matchByOrder = fuzzyMatch(terms);
+    const matchBySequence = exactMatch(terms);
+    const selector = {$or: [
       {code: matchByOrder},
       {name: matchBySequence}
     ]};
@@ -15,16 +15,14 @@ SearchSource.defineSource('gear', function(searchText, options) {
   }
 });
 
-SearchSource.defineSource('members', function(searchText, options) {
-  var options = {sort: {"profile.lastName": -1}, limit: 10};
+SearchSource.defineSource('members', (searchText, options) => {
+  options = {sort: {"profile.lastName": -1}, limit: 10};
 
   if(searchText) {
-    var terms = splitByComma(searchText);
-    var matchByOrder = fuzzyMatch(terms);
-    var matchBySequence = exactMatch(terms);
-    var selector = {$or: [
-      // {username: matchByOrder},
-      // {"emails.$": matchByOrder},
+    const terms = splitByComma(searchText);
+    const matchByOrder = fuzzyMatch(terms);
+    const matchBySequence = exactMatch(terms);
+    const selector = {$or: [
       {'profile.firstName': matchBySequence},
       {'profile.lastName': matchBySequence}
     ]};
@@ -42,14 +40,14 @@ function splitByComma(searchText) {
 }
 
 // Match the order the letters appear for any term. Case insensitive.
-// For instance, the term "BIg" will match with "Bigelow" AND "Building"
+// For instance, the term "BIg" will match with "Bigelow" AND "binge" AND "Building"
 function fuzzyMatch(terms) {
-  var query = [];
-  _.each(terms, function(part) {
-    var letters = part.trim().split("");
+  let query = [];
+  _.each(terms, part => {
+    const letters = part.trim().split("");
     query.push("(" + letters.join('.*') + ")");
   });
-  var queryString = query.join('|');
+  queryString = query.join('|');
   return new RegExp(queryString, "i");
 }
 
@@ -57,7 +55,7 @@ function fuzzyMatch(terms) {
 // For instance, the term "BIg" will match with "Bigelow" NOT "Building"
 function exactMatch(terms) {
   var query = [];
-  _.each(terms, function(part) {
+  _.each(terms, part => {
     query.push("(" + part.trim() + ")");
   });
   var queryString = query.join('|');

@@ -1,8 +1,22 @@
 <template name="gearItem">
-  <column class="gear-item {{getState}}">
+  <column class="gear-item {{getState}}" tabindex="0">
   <row class="align-end">
-    <span class="gear-code queue-gear grow">{{code}}</span>
-      <span class="gear-name queue-gear">{{name}} {{currentEdit}}</span>
+    <column class="grow">
+      <span class="gear-code queue-gear grow">
+        {{code}}
+      </span>
+      <div class="font-s1 gear-name">
+        <span class="type-bold">{{name}}</span> 
+      {{#if description}}
+        <span class="faded">— {{description}}</span>
+      {{/if}}
+      </div>
+    </column>
+    {{#if is 'rented'}}
+      <div class="gear-name">
+        <span class="boxed font-s1 faded" data-tooltip="By {{username status.rentedBy}}">RENTED</span>
+      </div>
+    {{/if}}
     {{> starRating rating=condition max=5}}
   </row>
     <!-- <span class="gear-name queue-gear">{{description}}</span> -->
@@ -16,14 +30,14 @@
             <i class="fa fa-fw fa-times"></i>
           </button>
         {{else}}
-          <button data-tooltip="Edit" class="btn-blank btn-icon edit-gear">
+          <button data-tooltip="Edit" class="btn-blank btn-icon edit-gear open-sidebar" data-sidebar-id="rightSidebar">
             <i class="fa fa-fw fa-pencil"></i>
           </button>
-          {{#if isNot 'rented'}}
+          {{#unless is 'rented'}}
             <button data-tooltip="Add to queue" class="btn-blank btn-icon queue-gear">
               <i class="fa fa-fw fa-plus"></i>
             </button>
-          {{/if}}
+          {{/unless}}
         {{/if}}
       {{/if}}
     </row>

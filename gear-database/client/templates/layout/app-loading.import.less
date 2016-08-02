@@ -1,0 +1,43 @@
+@primary: @roc-gray;
+@secondary: #BBB;
+
+.loading-content {
+  position:absolute;
+  top:50%;
+  width:100%;
+  height:300px;
+  text-align:center;
+  margin:-133px 0;
+  color: @secondary;
+
+
+  .big-gear, .small-gear {
+    animation: spin 3s linear 0s infinite;
+    transform-origin: center center;
+  }
+
+  .big-gear {
+    stroke: none;
+    fill: @secondary;
+  }
+
+  .small-gear {
+    stroke: @secondary;
+    fill: none;
+    animation-direction: reverse;
+    animation-duration: 2s
+  }
+
+  #smallGear2 {
+    transform: translate(-17px, 55px);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

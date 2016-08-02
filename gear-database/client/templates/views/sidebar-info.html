@@ -1,10 +1,8 @@
 <template name="sidebarInfo">
   <column class="content-padded gear-info grow">
-    <row class="sidebar-header">
-      <column class="header-title">
-        {{code}} Info
-      </column>
-    </row>
+    {{#contentFor 'right.header'}}
+        Equipment Information
+    {{/contentFor}}
     <column>
       <dl>
         <dt class="code huge-type">
@@ -18,6 +16,10 @@
         <dt class="description field med-type">
           <p>{{description}}</p>
         </dt>
+        <dd>Status</dd>
+        <dt class="description field med-type">
+          <span class="boxed">{{rented}}</span>
+        </dt>
         <dd>Condition</dd>
         <dt class="condition field med-type">
           {{conditionString}}
@@ -29,7 +31,9 @@
         </dt>
         <dd>Activity</dd>
         <dt class="activity field">
-          {{getActivity}}
+          {{#each history}}
+            {{> activityItem}}
+          {{/each}}
         </dt>
       </dl>
     </column>

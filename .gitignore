@@ -1,5 +1,6 @@
 todos
 .idea
+node_modules
 
 # cache files for sublime text
 *.tmlanguage.cache

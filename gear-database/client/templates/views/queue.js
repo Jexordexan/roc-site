@@ -6,17 +6,25 @@ var gearFields = ['code'];
 
 GearOptionsSearch = new SearchSource('gear', gearFields, options);
 
-
 Template.queue.helpers({
   'queue': function() {
     var queue = Session.get('checkoutQueue') || {};
     queue = _.values(queue);
     return queue;
   },
+  'codes': function() {
+    return GearList
+      .find()
+      .fetch()
+      .filter(function(g) {
+        return this.status ? this.status.returned : true;
+      })
+      .map(function(g) {
+        return g.code;
+      });
+  },
   'gearOptions': function() {
-    return searchResult = GearOptionsSearch.getData({
-      sort: {isoScore: -1}
-    });
+    return searchResult = GearOptionsSearch.getData({});
   }
 })
 
@@ -27,6 +35,9 @@ Template.queue.events({
     delete queue[gearId]
     var queue = Session.set('checkoutQueue', queue);
     Session.set(gearId, 'read');
+  },
+  'click .clear-queue': function(event) {
+    Session.set('checkoutQueue', null);
   },
   'submit #quick-add': function(event) {
     event.preventDefault();
@@ -39,6 +50,12 @@ Template.queue.events({
       Session.set('checkoutQueue', queue);
       Session.set(gearId, 'queue');
       event.target.codeInput.value = "";
+    } else {
+      Notifications.error('Invalid Code', gearId)
     }
   }
+})
+
+Template.queue.onRendered(function() {
+  Meteor.typeahead.inject();
 })

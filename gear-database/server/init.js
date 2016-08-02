@@ -1,5 +1,3 @@
-// Roles.addUsersToRoles(this.userId, 'admin', Roles.GLOBAL_GROUP)
-
 var gearData = [
   {
     "code":"CN-AB-03",
@@ -6736,3 +6734,17 @@ var typeData = {
   "PK": "Pin kit",
   "BO": "Book"
 }
+
+// var roleData = [
+//   'admin',
+//   'officer',
+//   'chair',
+//   'leader',
+//   'member'
+// ]
+
+// if (Roles.getAllRoles().count() === 0) {
+//   _.each(roleData, function(role) {
+//     Roles.createRole(role);
+//   })
+// }

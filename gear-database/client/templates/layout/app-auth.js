@@ -1,16 +1,18 @@
-var SIGNIN_ERRORS_KEY = 'signinErrors';
-var JOIN_ERRORS_KEY = 'joinErrors';
+var ERRORS = {}
+
+ERRORS.SIGNIN = 'signinErrors';
+ERRORS.JOIN = 'joinErrors';
 
 Template.signIn.onCreated(function() {
-  Session.set(SIGNIN_ERRORS_KEY, {});
+  Session.set(ERRORS.SIGNIN, {});
 });
 
 Template.signIn.helpers({
   errorMessages: function() {
-    return _.values(Session.get(SIGNIN_ERRORS_KEY));
+    return _.values(Session.get(ERRORS.SIGNINÎ));
   },
   errorClass: function(key) {
-    return Session.get(SIGNIN_ERRORS_KEY)[key] && 'error';
+    return Session.get(ERRORS.SIGNIN)[key] && 'error';
   }
 });
 
@@ -31,14 +33,14 @@ Template.signIn.events({
       errors.password = 'Password is required';
     }
     
-    Session.set(SIGNIN_ERRORS_KEY, errors);
+    Session.set(ERRORS.SIGNIN, errors);
     if (_.keys(errors).length) {
       return;
     }
     
     Meteor.loginWithPassword(email, password, function(error) {
       if (error) {
-        return Session.set(SIGNIN_ERRORS_KEY, {'none': error.reason});
+        return Session.set(ERRORS.SIGNIN, {'none': error.reason});
       }
       
       Router.go('home');
@@ -49,15 +51,15 @@ Template.signIn.events({
 
 
 Template.join.onCreated(function() {
-  Session.set(JOIN_ERRORS_KEY, {});
+  Session.set(ERRORS.JOIN, {});
 });
 
 Template.join.helpers({
   errorMessages: function() {
-    return _.values(Session.get(JOIN_ERRORS_KEY));
+    return _.values(Session.get(ERRORS.JOIN));
   },
   errorClass: function(key) {
-    return Session.get(JOIN_ERRORS_KEY)[key] && 'error';
+    return Session.get(ERRORS.JOIN)[key] && 'error';
   }
 });
 
@@ -66,7 +68,6 @@ Template.join.events({
     event.preventDefault();
     var email = template.$('[name=email]').val();
     var password = template.$('[name=password]').val();
-    var confirm = template.$('[name=confirm]').val();
 
     var errors = {};
 
@@ -78,11 +79,7 @@ Template.join.events({
       errors.password = 'Password required';
     }
 
-    if (confirm !== password) {
-      errors.confirm = 'Please confirm your password';
-    }
-
-    Session.set(JOIN_ERRORS_KEY, errors);
+    Session.set(ERRORS.JOIN, errors);
     if (_.keys(errors).length) {
       return;
     }
@@ -92,7 +89,7 @@ Template.join.events({
       password: password
     }, function(error) {
       if (error) {
-        return Session.set(JOIN_ERRORS_KEY, {'none': error.reason});
+        return Session.set(ERRORS.JOIN, {'none': error.reason});
       }
       Router.go('home');
       Notifications.success('Account successfuly created!');

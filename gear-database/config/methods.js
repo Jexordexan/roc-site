@@ -15,7 +15,6 @@ Meteor.methods({
   },
   editGear: function (data) {
     // Make sure the user is logged in before inserting a task
-    console.log(data);
 
     var gearId = data[0];
     var gearData = data[1];
@@ -25,8 +24,6 @@ Meteor.methods({
       description: String,
       condition: Number
     });
-
-    console.log(data);
 
     var validCode = Schema.inventoryCodeRegEx.test(gearData.code);
 
@@ -61,16 +58,19 @@ Meteor.methods({
     Roles.setUserRoles(targetUserId, roles, group)
   },
   checkOut: function(userId, queue, notes, dueInterval) {
-    console.log(queue)
-
     // require a user ID, and at least one gear item in the queue
     if (! Meteor.userId()) {
       throw new Meteor.Error("not-authorized");
     }
 
+    if (! queue.length) {
+      throw new Meteor.Error("No equipment queued.");
+    }
+
     // set due by date to current date + interval
     var currentDate = new Date();
-    dueDate = currentDate.setTime(currentDate.getTime() + (dueInterval || (14 * 24 * 60 * 60 * 1000)));
+    var dueDate = new Date();
+    dueDate.setDate(dueDate.getDate() + (dueInterval || 14));
 
     // create a checkout object of the userId, user's name, all the gear and codes
     var checkoutData = {
@@ -109,7 +109,7 @@ Meteor.methods({
   },
 
   returnGear: function(gearId) {
-
+    //
   },
 
   sendEmail: function (to, subject, text) {

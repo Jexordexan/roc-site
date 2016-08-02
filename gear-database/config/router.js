@@ -1,24 +1,32 @@
-function openSidebars (left, right) {
-  if (left) {
+function openSidebars (command) {
+  if (command == 'left') {
     Session.set('leftSidebar', 'open');
   }
-  if (right) {
+  else if (command == 'right') {
+    Session.set('rightSidebar', 'open');
+  }
+  else if (command == 'both') {
+    Session.set('leftSidebar', 'open');
     Session.set('rightSidebar', 'open');
   }
 }
 
-function closeSidebars (left, right) {
-  if (left) {
+function closeSidebars (command) {
+  if (command == 'left') {
     Session.set('leftSidebar', 'closed');
   }
-  if (right) {
+  else if (command == 'right') {
+    Session.set('rightSidebar', 'closed');
+  }
+  else if (command == 'both') {
+    Session.set('leftSidebar', 'closed');
     Session.set('rightSidebar', 'closed');
   }
 }
 
-
 Router.configure({
   layoutTemplate: 'ApplicationLayout',
+  template: 'inventory',
   waitOn: function() {
     return [
       Meteor.subscribe('gear'),
@@ -26,22 +34,69 @@ Router.configure({
       Meteor.subscribe('checkouts'),
       Meteor.subscribe('members')
     ];
-  }
+  },
+  loadingTemplate: 'loading',
+  notFoundTemplate: 'notFound'
 });
 
+Router.plugin('dataNotFound', {notFoundTemplate: 'notFound'});
+
 Router.route('/', function () {
-  this.redirect('/inventory');
+  this.render('dashboard');
 },{name: 'home'});
 
-Router.route('/about', function () {
-  this.render('about');
+Router.route('/signin', function () {
+  Session.set('activeModal', 'signInUp');
+},{name: 'signIn'});
+
+Router.route('/loading', function () {
+  this.render('loading');
 });
 
 Router.route('/inventory', function () {
   this.render('inventory');
-  Session.set('resultFilter', 'gear');
-  closeSidebars(false, true);
-  // this.layout('NoSidebarLayout');
+  closeSidebars('both');
+  this.params.query.search && Session.set('searchText', this.params.query.search);
+  this.params.query.mode && Session.set('activeFilter', this.params.query.mode);
+  Session.set('resultFilter', this.params.query.show || 'gear');
+
+  // Current action
+  let action = this.params.query.action || 'info';
+
+  if (action === 'add') {
+    openSidebars('right');
+    this.render('addGear', {
+      to: 'right'
+    });
+    return;
+  }
+
+  // Current equipment
+  let id = this.params.query.id || null;
+  let gear = id && GearList.findOne({code: id});
+  if (!gear) {
+    return;
+  }
+
+  if (action === 'edit') {
+    openSidebars('right');
+    this.render('sidebarEdit', {
+      to: 'right',
+      data: function () {
+        return gear
+      }
+    })
+  }
+
+  if (action === 'info') {
+    openSidebars('right');
+    this.render('sidebarInfo', {
+      to: 'right',
+      data: function () {
+        return gear
+      }
+    })
+  }
 });
 
 Router.route('/account', function () {
@@ -66,7 +121,7 @@ Router.route('/inventory/info/:code', function () {
 		}
 	})
   Session.set('activeGear', this.params.code);
-  openSidebars(false, true);
+  openSidebars("right");
 }, {
 	name: 'inventory.info'
 });
@@ -80,7 +135,7 @@ Router.route('/inventory/edit/:code', function () {
 		}
 	})
   Session.set('activeGear', this.params.code);
-  openSidebars(false, true);
+  openSidebars("right");
 }, {
 	name: 'inventory.edit'
 });

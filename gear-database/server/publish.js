@@ -15,5 +15,5 @@ Meteor.publish('checkouts', function() {
 });
 
 Meteor.publish('roles', function (){ 
-  return Meteor.roles.find({})
+  return Meteor.roles.find();
 })

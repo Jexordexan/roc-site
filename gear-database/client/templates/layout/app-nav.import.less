@@ -1,16 +1,19 @@
 header {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 54px;
   z-index: 3;
   background: @roc-gray;
-
-  .box-shadow(0 2px 5px @shade2);
+  box-shadow: 0 2px 5px @shade2;
 }
 
 header,
 nav,
 .nav-button {
-  .display(flex);
-  .justify-content(space-between);
+  display: flex;
+  justify-content: space-between;
 }
 
 .nav-logo {
@@ -54,7 +57,17 @@ nav,
   position: relative;
 
   .display-row;
-  .align-items(center);
+  align-items: center;
+}
+
+.nav-left,
+.nav-right {
+  flex-shrink: 0;
+  min-width: 200px;
+
+  @media screen and (max-width: @phone-width) {
+    min-width: 50px
+  }
 }
 
 .nav-center {

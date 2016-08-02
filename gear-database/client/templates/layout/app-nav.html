@@ -1,19 +1,18 @@
 <template name="appNavigation">
   <div class="nav-left">
-    <img class="nav-logo" src="http://www.outing.org/images/badge_small.png" alt="">
+    <button class="nav-link btn-blank toggle-menu">
+      <img src="images/menu.svg" alt="">
+    </button>
+    <div class="nav-logo hide-phone">
+      <a href="/">
+        <img src="http://www.outing.org/images/badge_small.png" alt="">
+      </a>
+    </div>
   </div>
-  <div class="nav-center">
+  <div class="nav-center grow">
     {{> searchBox}}
   </div>
-	<!-- <nav id="app-nav" class="navbar">
-    <div class="nav-button">
-      <a href="{{pathFor 'inventory'}}" class="nav-link">Inventory</a>
-    </div>
-		<div class="nav-button">
-			<a href="{{pathFor 'inventory.add'}}" class="nav-link">Add Gear</a>
-		</div>
-	</nav> -->
-  <row class="nav-right">
+  <row class="nav-right justify-end">
     {{> accountButtons}}
   </row>
 </template>
@@ -27,23 +26,33 @@
         </a>
       </ul>
     {{/dropdown}}
+    {{> roleTag}}
     <div class="button-group">
-      <a href="{{pathFor 'account'}}" class="btn nav-link">
+      <a href="{{pathFor 'account'}}" class="btn nav-link hide-phone">
         {{currentUser.profile.firstName}}
       </a>
       {{#dropdownTrigger name="userMenu"}}
-        <a href="{{pathFor 'account'}}" class="btn btn-icon">
+        <a href="{{pathFor 'account'}}" class="btn btn-icon nav-link">
           <i class="fa fa-fw fa-caret-down"></i>
         </a>
       {{/dropdownTrigger}}
     </div>
-  {{else}}
-    <button class="btn-info modal" data-modal-template="signInUp">
+  {{else}}      
+    <a href="/signIn" class="nav-link btn-info">
       Sign In
-    </button>
-    OR
-    <button class="btn-primary modal" data-modal-template="signInUp">
-      Join the Club
-    </button>
+    </a>
   {{/if}}
+</template>
+
+<template name="sidebarNav">
+  <ul class="sidebar-nav">
+    <li><a href="{{pathFor 'recent'}}">Recent</a></li>
+    <li><a href="{{pathFor 'myGear'}}">My Gear</a></li>
+    <li><a href=""></a></li>
+    <li><a href=""></a></li>
+    <li><a href=""></a></li>
+    <li><a href=""></a></li>
+    <li><a href=""></a></li>
+    <li><a href=""></a></li>
+  </ul>
 </template>

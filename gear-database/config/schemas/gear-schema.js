@@ -86,6 +86,7 @@ Schema.Gear = new SimpleSchema({
   },
   activity: {
     type: String,
+    optional: true,
     autoform: {
       type: 'hidden'
     },
@@ -100,6 +101,7 @@ Schema.Gear = new SimpleSchema({
   },
   type: {
     type: String,
+    optional: true,
     autoform: {
       type: 'hidden'
     },
@@ -114,6 +116,7 @@ Schema.Gear = new SimpleSchema({
   },
   index: {
     type: String,
+    optional: true,
     autoform: {
       type: 'hidden'
     },
@@ -128,12 +131,14 @@ Schema.Gear = new SimpleSchema({
   },
   status: {
     type: Schema.GearRental,
+    optional: true,
     autoform: {
       type: 'hidden'
     }
   },
   history: {
     type: [Schema.GearRental],
+    optional: true,
     autoform: {
       type: 'hidden'
     }

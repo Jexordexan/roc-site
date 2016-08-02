@@ -49,7 +49,7 @@ Template.searchBox.events({
     Session.set("activeFilter", this);
   },
   "click .clear-search": function(event, template) {
-    template.$('#search-input').val('').trigger('input');
+    template.$('#search-input').val('');
   },
   "input #search-input": _.throttle(function(e) {
     if (Router.current().route.getName() !== 'inventory') {
@@ -58,7 +58,17 @@ Template.searchBox.events({
     var el = e.target;
     var text = $(el).val().trim();
     Session.set("searchText", text);
-    GearSearch.search(text);
-    MemberSearch.search(text);
-  }, 200)
+  }, 200),
+  "focus #search-input": function(e) {
+    Router.go('inventory');
+  },
+  "change #search-input": function(e) {
+    var el = e.target;
+    var text = $(el).val().trim();
+
+    if (text) {
+      Router.go('inventory', {}, {query: {search: text}});
+    }
+    return false;
+  }
 });

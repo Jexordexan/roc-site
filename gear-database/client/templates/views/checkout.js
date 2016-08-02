@@ -2,6 +2,10 @@ var dueIntervals = [
   {
     name: "Two weeks",
     value: "14"
+  },
+  {
+    name: "One month",
+    value: "30"
   }
 ]
 
@@ -15,22 +19,30 @@ Template.checkout.helpers({
     return dueIntervals;
   },
   'members': function() {
-    return Members.find().fetch();
+    return Members.find().fetch().map(function(m) {
+      let name = m.profile.firstName + " " + m.profile.lastName;
+      return {id: m._id, value: name};
+    });
+  },
+  'autocomplete': (event, suggestion, datasetName) => {
+    $('#renterId').val(suggestion.id);
   },
   'emailOrName': function() {
+    let val = "" 
     if (this.profile) {
-      return this.profile.firstName + " " + this.profile.lastName;
+      val =  this.profile.firstName + " " + this.profile.lastName;
     } else {
-      return this.emails[0].address;
+      val =  this.emails[0].address;
     }
+    return {id: this.id, value: val};
   }
-})
+});
 
 Template.checkout.events({
   'submit #checkoutForm': function(event, template) {
     event.preventDefault();
-    var userId = event.target.userId.value;
-    var dueInterval = event.target.dueInterval.value;
+    var userId = event.target.renterId.value;
+    var dueInterval = parseInt(event.target.dueInterval.value);
     var notes = event.target.notes.value;
     var queue = _.values(Session.get('checkoutQueue'));
 
@@ -39,9 +51,14 @@ Template.checkout.events({
         console.log("error:");
         console.log(error)
       } else {
-        console.log("result:");
-        console.log(result)
+        user = Members.findOne({_id: userId});
+        Notifications.success('All set!', `${user.profile.firstName} rented ${queue.length} items `);
+        Session.set('checkoutQueue', null);
       }
     });
   }
+})
+
+Template.checkout.onRendered(function() {
+  Meteor.typeahead.inject(".typeahead");
 })

@@ -1,3 +1,23 @@
+//Positions Schema
+
+Schema.Position = new SimpleSchema({
+  type: {
+    type: String,
+    allowedValues: ['Chair', 'Leader', 'Officer', 'Patch']
+  },
+  name: {
+    type: String
+  },
+  class: {
+    type: String,
+    optional: true
+  },
+  activity: {
+    type: String,
+    optional: true
+  }
+});
+
 
 // User Profile Schema
 Schema.UserProfile = new SimpleSchema({
@@ -56,7 +76,11 @@ Schema.User = new SimpleSchema({
     regEx: SimpleSchema.RegEx.Email
   },
   "emails.$.verified": {
-    type: Boolean
+    type: Boolean,
+    optional: true,
+    autoform: {
+      type: 'hidden'
+    }
   },
   createdAt: {
     type: Date,
@@ -78,14 +102,18 @@ Schema.User = new SimpleSchema({
     type: Schema.UserProfile,
     optional: true
   },
+  positions: {
+    type: Array,
+    optional: true
+  },
+  "positions.$": {
+    type: Schema.Position
+  },
   // Make sure this services field is in your schema if you're using any of the accounts packages
   services: {
     type: Object,
     optional: true,
-    blackbox: true,
-    autoform: {
-      type: 'hidden'
-    }
+    blackbox: true
   },
   // Add `roles` to your schema if you use the meteor-roles package.
   // Option 1: Object type

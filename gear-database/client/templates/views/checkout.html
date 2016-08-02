@@ -3,9 +3,9 @@
     <h2>Checkout</h2>
   </row>
   <row class="modal-body column-tablet">
-    <column class="checkout-list grow">
+    <column class="checkout-list grow scroll-column">
       {{#each selectedGear}}
-        <row>
+        <row class="no-shrink">
           {{> gearItem}}
         </row>
       {{/each}}
@@ -14,11 +14,9 @@
       <form action="#" id="checkoutForm" class="checkout-form column">
         <div class="form-group">
           <label class="control-label" for="renterSelect">Renter</label>
-          <select name="userId" id="renterSelect" class="form-control">
-            {{#each members}}
-              <option value="{{_id}}">{{emailOrName}}</option>
-            {{/each}}
-          </select>
+          <input name="renterName" id="renterSelect" class="form-control typeahead" 
+            type="text" autocomplete="off" spellcheck="off" data-source="members" data-autocomplete="autocomplete">
+          <input type="hidden" id="renterId">
         </div>
         <div class="form-group">
           <label class="control-label" for="intervalSelect">Due back in</label>
@@ -32,13 +30,13 @@
           <label class="control-label" for="intervalSelect">Notes</label>
           <textarea name="notes" id="notes" cols="30" rows="3" class="form-control"></textarea>
         </div>
-        <div class="form-group">
-          <button class="btn-primary" type="submit">Checkout</button>
-        </div>
       </form>
     </column>
   </row>
   <row class="modal-footer">
-    
+    <row class="pin-right">
+      <button class="btn close-modal" type="submit" form="checkoutForm">Cancel</button>
+      <button class="btn-primary" type="submit" form="checkoutForm">Checkout</button>
+    </row>
   </row>
 </template>

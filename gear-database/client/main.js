@@ -6,10 +6,23 @@ Meteor.startup(function () {
 	});
 });
 
-UI.registerHelper("UsersCollection", Meteor.users);
+SimpleSchema.debug = true;
 
-UI.registerHelper("currentProfile", function() {
-  var user = Meteor.user();
-  console.log(user);
-  return user;
+Template.registerHelper("UsersCollection", Meteor.users);
+
+Template.registerHelper("currentProfile", function() {
+  return Meteor.user();
+});
+
+Template.registerHelper("username", function(userId) {
+  let member = Members.findOne(userId);
+  if (member.profile.lastName) {
+    return member.profile.firstName + ' ' + member.profile.lastName;
+  } else {
+    return member.username || member.emails[0];
+  }
+});
+
+Template.registerHelper('get',function(input){
+  return Session.get(input);
 });

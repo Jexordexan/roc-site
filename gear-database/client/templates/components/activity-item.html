@@ -1,0 +1,7 @@
+<template name="activityItem">
+  <column class="activity-item">
+    <h3>{{username rentedBy}}</h3>
+    <p data-tooltip="{{dateRented}}">Rented {{livestamp dateRented}}</p>
+    <p data-tooltip="{{dateDue.toDateString}}">Due {{livestamp dateDue}}</p>
+  </column>
+</template>

@@ -1,16 +1,10 @@
 <template name="queue">
-{{#if queue}}
-<column class="checkout-queue">
-  <row>
-    <span class="queue-title">Selected Gear ({{queue.length}})</span>
-    <button class="btn checkout-gear modal" data-modal-template="checkout">
-      CHECKOUT <i class="fa fa-fw fa-sign-out"></i>
-    </button>
-  </row>
+
+<column class="checkout-queue {{#unless queue}}hide-all{{/unless}}">
   <row class="gear-list wrap">
     {{#each queue}}
       <column class="gear-item queue">
-        <span class="gear-name">{{code}}</span>
+        <span class="gear-code">{{code}}</span>
         <row class="icon-group">
           <button class="btn-blank btn-icon cancel-gear">
             <i class="fa fa-fw fa-times"></i>
@@ -18,15 +12,17 @@
         </row>
       </column>
     {{/each}}
-    <form action="#" id="quick-add">
-      <input type="text" name="codeInput" id="quick-add-input" class="gear-code-input" placeholder="+ Quick add" list="codeList" autocomplete="off"/>
-      <datalist id="codeList">
-        {{#each gearOptions}}
-          <option value="{{code}}"></option>
-        {{/each}}
-      </datalist>
-    </form>
+    <row class="grow no-shrink">
+      <form action="#" id="quick-add">
+        <input type="text" name="codeInput" id="quick-add-input" class="gear-code-input typeahead" placeholder="+ Quick add" data-source="codes" autocomplete="off"/>
+      </form>
+      <button class="btn pin-right clear-queue">
+        deselect <span class="boxed">{{queue.length}}</span>
+      </button>
+      <button class="btn-primary checkout-gear modal" data-modal-template="checkout">
+        CHECKOUT <i class="fa fa-fw fa-sign-out"></i>
+      </button>
+    </row>
   </row>
 </column>
-{{/if}}
 </template>

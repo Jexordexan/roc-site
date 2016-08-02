@@ -20,8 +20,9 @@
         </ul>
       {{/dropdown}}
     {{/dropdownTrigger}}
+    <div class="search-icon-divider"></div>
 		<row class="search-box grow">
-			<input type="text" id="search-input" placeholder="{{activeFilter.label}}" class="{{isDirty}} grow">
+			<input type="text" id="search-input" placeholder="{{activeFilter.label}}" value="{{get 'searchText'}}" class="{{isDirty}} grow">
 			<button class="btn-nostyle clear-search">
 				&times;
 			</button>

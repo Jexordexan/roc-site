@@ -1,4 +1,7 @@
+@nav-height: 54px;
+
 #app-main {
+  margin-top: @nav-height;
   position: relative;
 
   .flex(1);
@@ -13,7 +16,7 @@ footer {
   .flex-direction(column);
 
   > .content {
-    overflow: auto;
+    overflow-y: scroll;
 
     .flex(1);
   }
@@ -44,14 +47,31 @@ aside {
   background: #222;
 }
 
-#rightSidebar {
-  // .position(absolute, 0, 0, 0);
+.sidebar-header {
+  padding: 10px;
+  text-transform: uppercase;
+  opacity: .5;
+}
+
+@media screen and (max-width: @phone-width) {
+  #rightSidebar {
+    z-index: @sidebar-z;
+    .position(fixed, @nav-height, 0, 0);
+  }
+
+  #leftSidebar {
+    z-index: @sidebar-z;
+    .position(fixed, @nav-height, auto, 0, 0);
+  }
 }
 
 .close-sidebar-button {
   z-index: 5;
-
+  opacity: .5;
   .position(absolute, 0, 0);
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .resizable-width {
@@ -89,13 +109,5 @@ aside {
 
   .page-content {
     padding: 20px;
-  }
-}
-
-@media(max-width: @tablet-width) {
-  #rightSidebar {
-    z-index: @sidebar-z;
-
-    .position(absolute, 0, 0, 0);
   }
 }

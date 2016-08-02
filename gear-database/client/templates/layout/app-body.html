@@ -14,7 +14,7 @@
   </row>
   <row id="app-main">
   	<aside id="leftSidebar" class="sidebar sidebar-left resizable-width {{sidebarClass 'leftSidebar'}}">
-      <div class="content">{{> yield 'left'}}</div>
+      <div class="content">{{> appMenu}}</div>
       <div class="resize-width-handle right-side"></div>
   	</aside>
   	<article class="app-content grow">
@@ -23,6 +23,7 @@
       </div>
   	</article>
     <aside id="rightSidebar" class="sidebar sidebar-right resizable-width {{sidebarClass 'rightSidebar'}}">
+      <div class="sidebar-header">{{> yield 'right.header'}}</div>
       <div class="content">{{> yield 'right'}}</div>
       <div class="resize-width-handle left-side"></div>
       <button class="btn-nostyle btn-icon close-sidebar close-sidebar-button" data-sidebar-id="rightSidebar">
@@ -47,7 +48,7 @@
   </header>
   <row id="app-main">
     <article class="app-content grow">
-      {{> yield}}
+      <div class="content">{{> yield}}</div>
     </article>
   </row>
   <footer>
