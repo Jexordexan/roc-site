@@ -1,27 +1,27 @@
 <template name="queue">
-
 <column class="checkout-queue {{#unless queue}}hide-all{{/unless}}">
   <row class="gear-list wrap">
     {{#each queue}}
-      <column class="gear-item queue">
+      <row class="gear-item queue">
         <span class="gear-code">{{code}}</span>
         <row class="icon-group">
           <button class="btn-blank btn-icon cancel-gear">
             <i class="fa fa-fw fa-times"></i>
           </button>
         </row>
-      </column>
+      </row>
     {{/each}}
     <row class="grow no-shrink">
-      <form action="#" id="quick-add">
+      <form id="quick-add" class="row">
         <input type="text" name="codeInput" id="quick-add-input" class="gear-code-input typeahead" placeholder="+ Quick add" data-source="codes" autocomplete="off"/>
+        <input class="hide-all" type="submit"/>
       </form>
       <button class="btn pin-right clear-queue">
-        deselect <span class="boxed">{{queue.length}}</span>
+        Cancel
       </button>
-      <button class="btn-primary checkout-gear modal" data-modal-template="checkout">
-        CHECKOUT <i class="fa fa-fw fa-sign-out"></i>
-      </button>
+      <a class="btn-primary checkout-gear" href="{{pathFor route='checkout'}}">
+        Check out <i class="fa fa-fw fa-sign-out"></i>
+      </a>
     </row>
   </row>
 </column>

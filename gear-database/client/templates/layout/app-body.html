@@ -6,25 +6,32 @@
 
 <template name="ApplicationLayout">
 <column id="app-body" class="{{activeModalClass}}">
-  <header class="app-navbar">
+  <header id="app-header">
     {{> appNavigation}}
   </header>
   <row class="app-toolbar">
     
   </row>
   <row id="app-main">
-  	<aside id="leftSidebar" class="sidebar sidebar-left resizable-width {{sidebarClass 'leftSidebar'}}">
+  	<aside id="leftSidebar" class="sidebar section sidebar-left resizable-width {{sidebarClass 'leftSidebar'}}">
+      <div class="sidebar-header">
+        <header>Menu</header>
+      </div>
       <div class="content">{{> appMenu}}</div>
       <div class="resize-width-handle right-side"></div>
+      <button class="btn-nostyle btn-icon close-sidebar close-sidebar-button" data-sidebar-id="leftSidebar">
+        <img src="/images/times.svg" alt="">
+      </button>
   	</aside>
-  	<article class="app-content grow">
-      <div class="content">
+  	<section class="app-content grow">
+      <div class="content scroll-y">
         {{> yield}}
       </div>
-  	</article>
-    <aside id="rightSidebar" class="sidebar sidebar-right resizable-width {{sidebarClass 'rightSidebar'}}">
+  	</section>
+    <aside id="rightSidebar" class="sidebar section sidebar-right resizable-width {{sidebarClass 'rightSidebar'}}">
       <div class="sidebar-header">{{> yield 'right.header'}}</div>
       <div class="content">{{> yield 'right'}}</div>
+      <div class="sidebar-footer">{{> yield 'right.footer'}}</div>
       <div class="resize-width-handle left-side"></div>
       <button class="btn-nostyle btn-icon close-sidebar close-sidebar-button" data-sidebar-id="rightSidebar">
         <img src="/images/times.svg" alt="">
@@ -47,9 +54,9 @@
     {{> appNavigation}}
   </header>
   <row id="app-main">
-    <article class="app-content grow">
+    <section class="app-content grow">
       <div class="content">{{> yield}}</div>
-    </article>
+    </section>
   </row>
   <footer>
     {{> queue}}

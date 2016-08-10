@@ -40,3 +40,4 @@ standard-minifier-js@1.1.8
 juliancwirko:postcss
 less@2.7.4
 copleykj:livestamp
+momentjs:moment

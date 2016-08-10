@@ -57,7 +57,7 @@ Meteor.methods({
 
     Roles.setUserRoles(targetUserId, roles, group)
   },
-  checkOut: function(userId, queue, notes, dueInterval) {
+  checkOut: function(userId, description, queue, notes, dueInterval) {
     // require a user ID, and at least one gear item in the queue
     if (! Meteor.userId()) {
       throw new Meteor.Error("not-authorized");
@@ -98,9 +98,10 @@ Meteor.methods({
       };
 
       GearList.update(gearItem._id, {
-          $set: {status: rental},
-          $push: {history: rental}
+          $set: {status: rental}
       });
+
+      Meteor.call('createGearRevision', gearItem._id, 'Checked out', userId);
     })
   },
 
@@ -109,21 +110,31 @@ Meteor.methods({
   },
 
   returnGear: function(gearId) {
-    //
-  },
+    // get the gear object
+    let item = GearList.findOne(gearId);
+    let now = new Date();
 
-  sendEmail: function (to, subject, text) {
-    check([to, subject, text], [String]);
+    // check if the gear item exists before continuing
+    if (!item) {
+      return;
+    }
 
-    // Let other method calls from the same client start running,
-    // without waiting for the email sending to complete.
-    this.unblock();
+    // get the current status
+    let status = item.status
 
-    Email.send({
-      to: to,
-      from: "Outing Club <roc@outing.org>",
-      subject: subject,
-      text: text
+    // make sure the gear is still rented out
+    if (status.returned) {
+      return;
+    }
+
+    // set the returned prop and returnedDate on both the history and status objects
+    GearList.update( gearId, {
+      $set: {
+        'status.returned' : true,
+        'status.dateReturned' : now
+      }
     });
+
+    Meteor.call('createGearRevision', gearId, 'Checked in');
   }
 });

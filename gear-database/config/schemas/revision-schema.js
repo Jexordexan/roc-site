@@ -1,34 +1,21 @@
-Schema.Checkout = new SimpleSchema({
+Schema.Revision = new SimpleSchema({
   userId: {
     type: String,
+    denyUpdate: true,
     regEx: SimpleSchema.RegEx.Id
   },
-  gearRented: {
-    type: [Object],
-    blackbox: true
-  },
-  description: {
+  itemId: {
     type: String,
-    optional: true
+    denyUpdate: true,
+    regEx: SimpleSchema.RegEx.Id
   },
-  notes: {
+  message: {
     type: String,
-    optional: true
+    denyUpdate: true
   },
-  dateReturned: {
-    type: Object,
-    optional: true,
-    denyInsert: true
-  },
-  dateDue: {
-    type: Date
-  },
-  dateRented: {
+  modified: {
     type: Date,
     denyUpdate: true,
-    autoform: {
-      type: 'hidden'
-    },
     autoValue: function() {
       if (this.isInsert) {
         return new Date;
@@ -38,5 +25,10 @@ Schema.Checkout = new SimpleSchema({
         this.unset();  // Prevent user from supplying their own value
       }
     }
+  },
+  model: {
+    type: Object,
+    denyUpdate: true,
+    blackbox: true,
   }
 });

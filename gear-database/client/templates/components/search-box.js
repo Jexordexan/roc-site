@@ -60,7 +60,9 @@ Template.searchBox.events({
     Session.set("searchText", text);
   }, 200),
   "focus #search-input": function(e) {
-    Router.go('inventory');
+    if (Router.current().route.getName() !== 'inventory') {
+      Router.go('inventory');
+    }
   },
   "change #search-input": function(e) {
     var el = e.target;

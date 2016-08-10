@@ -32,8 +32,53 @@ Router.configure({
       Meteor.subscribe('gear'),
       Meteor.subscribe('activities'),
       Meteor.subscribe('checkouts'),
+      Meteor.subscribe('history'),
       Meteor.subscribe('members')
     ];
+  },
+  onAfterAction: function() {
+    closeSidebars('both');
+    this.params.query.search && Session.set('searchText', this.params.query.search);
+    this.params.query.mode && Session.set('activeFilter', this.params.query.mode);
+    Session.set('resultFilter', this.params.query.show || 'gear');
+
+    // Current action
+    let action = this.params.query.action || 'info';
+
+    if (action === 'add') {
+      openSidebars('right');
+      this.render('addGear', {
+        to: 'right'
+      });
+      return;
+    }
+
+    // Current equipment
+    let id = this.params.query.id || null;
+    let gear = id && GearList.findOne({code: id});
+    if (!gear) {
+      return;
+    }
+
+    if (action === 'edit') {
+      openSidebars('right');
+      this.render('sidebarEdit', {
+        to: 'right',
+        data: function () {
+          return gear
+        }
+      })
+    }
+
+    if (action === 'info') {
+      openSidebars('right');
+      this.render('sidebarInfo', {
+        to: 'right',
+        data: function () {
+          return gear
+        }
+      })
+    }
   },
   loadingTemplate: 'loading',
   notFoundTemplate: 'notFound'
@@ -55,49 +100,19 @@ Router.route('/loading', function () {
 
 Router.route('/inventory', function () {
   this.render('inventory');
-  closeSidebars('both');
-  this.params.query.search && Session.set('searchText', this.params.query.search);
-  this.params.query.mode && Session.set('activeFilter', this.params.query.mode);
-  Session.set('resultFilter', this.params.query.show || 'gear');
-
-  // Current action
-  let action = this.params.query.action || 'info';
-
-  if (action === 'add') {
-    openSidebars('right');
-    this.render('addGear', {
-      to: 'right'
-    });
-    return;
-  }
-
-  // Current equipment
-  let id = this.params.query.id || null;
-  let gear = id && GearList.findOne({code: id});
-  if (!gear) {
-    return;
-  }
-
-  if (action === 'edit') {
-    openSidebars('right');
-    this.render('sidebarEdit', {
-      to: 'right',
-      data: function () {
-        return gear
-      }
-    })
-  }
-
-  if (action === 'info') {
-    openSidebars('right');
-    this.render('sidebarInfo', {
-      to: 'right',
-      data: function () {
-        return gear
-      }
-    })
-  }
 });
+
+Router.route('/checkout', function () {
+  Session.set('activeModal', 'checkout');
+},{name: 'checkout'});
+
+Router.route('/checkout/:id', function () {
+  this.render('checkoutView', {
+    data: function() {
+      return Checkouts.findOne(this.params.id);
+    }
+  });
+},{name: 'checkout.view'});
 
 Router.route('/account', function () {
   this.render('editUser');

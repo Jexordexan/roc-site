@@ -1,41 +1,60 @@
 <template name="sidebarInfo">
+  {{#contentFor 'right.header'}}
+    <header>Equipment Information</header>
+  {{/contentFor}}
   <column class="content-padded gear-info grow">
-    {{#contentFor 'right.header'}}
-        Equipment Information
-    {{/contentFor}}
     <column>
       <dl>
         <dt class="code huge-type">
           {{code}}
         </dt>
+
         <dd>Equipment Name</dd>
         <dt class="name field big-type">
           {{name}}
         </dt>
+
+        {{#if description}}
         <dd>Description</dd>
-        <dt class="description field med-type">
+        <dt class="field med-type">
           <p>{{description}}</p>
         </dt>
+        {{/if}}
+
         <dd>Status</dd>
-        <dt class="description field med-type">
+        <dt class="field med-type">
           <span class="boxed">{{rented}}</span>
         </dt>
+
         <dd>Condition</dd>
-        <dt class="condition field med-type">
-          {{conditionString}}
+        <dt class="condition row align-center field med-type">
+          {{getCondition condition}}
           {{> starRating rating=condition max=5}}
         </dt>
+
+        {{#if notes}}
         <dd>Notes</dd>
         <dt class="activity field">
           {{notes}}
         </dt>
+        {{/if}}
+
         <dd>Activity</dd>
-        <dt class="activity field">
+        <ul>
           {{#each history}}
+            <li>
             {{> activityItem}}
+            </li>
           {{/each}}
-        </dt>
+        </ul>
       </dl>
     </column>
   </column>
+  {{#contentFor 'right.footer'}}
+    <footer>
+      <button class="btn-primary pin-right edit-gear">
+        Edit
+      </button>
+    </footer>
+  {{/contentFor}}
 </template>

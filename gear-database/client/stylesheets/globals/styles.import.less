@@ -46,6 +46,19 @@ body {
   // background-image: url(http://outing.org/images/ROC-Pattern-dark.png);
 }
 
+a {
+  color: @roc-sky;
+}
+
+a.inherit {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 button,
 input,
 label,
@@ -62,7 +75,7 @@ input[type=number],
 input[type=date],
 select,
 textarea {
-  margin: 5px;
+  margin: 5px 0;
   font-weight: 300;
   color: white;
   border: none;
@@ -90,6 +103,7 @@ textarea {
 [class*=' btn'] {
   display: inline-block;
   margin: 5px;
+  line-height: normal;
   padding: 5px 15px;
   // border: 1px solid @tone2;
   text-transform: uppercase;
@@ -160,40 +174,6 @@ img {
   max-height: 100%;
 }
 
-a.clean {
-  color: inherit;
-  text-decoration: none;
-}
-
-dd {
-  margin: 10px 5px 0;
-  opacity: .5;
-}
-
-h1,
-.huge-type {
-  .type-thin;
-  .font-l1;
-}
-
-h2,
-.big-type {
-  .type-light;
-  .font-m2;
-}
-
-h3,
-.med-type {
-  .type-light;
-  .font-s3;
-}
-
-.small-type,
-dd,
-.help-block {
-  font-size: .75em;
-}
-
 .help-block {
   text-align: right;
 }
@@ -202,6 +182,30 @@ dd,
   .form-control {
     border-color: @roc-red;
   }
+}
+
+.float-right {
+  float: right !important;
+}
+
+.float-left {
+  float: left !important;
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.pad-10 {
+  padding: 10px;
+}
+
+.pad-5 {
+  padding: 5px;
 }
 
 .faded {

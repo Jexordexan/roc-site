@@ -1,10 +1,10 @@
 <template name="sidebarEdit">
+  {{#contentFor 'right.header'}}
+    <header class="header-content">Edit Equipment</header>
+  {{/contentFor}}
   <column class="content-padded gear-info grow">
-    {{#contentFor 'right.header'}}
-      Edit Equipment
-    {{/contentFor}}
     <column>
-      {{> quickForm collection="GearList" type="update" doc=this id="editGearForm" name="editGearForm" omitFields="['status', 'history', 'updated']"}}
+      {{> quickForm collection="GearList" type="update" doc=this id="editGearForm" name="editGearForm" omitFields="index, activity, type, status, history, updated"}}
     </column>
   </column>
 </template>

@@ -51,11 +51,11 @@ Template.queue.events({
       Session.set(gearId, 'queue');
       event.target.codeInput.value = "";
     } else {
-      Notifications.error('Invalid Code', gearId)
+      Notifications.error(`Invalid Code "${query}"`, 'Enter a valid inventory code')
     }
   }
 })
 
 Template.queue.onRendered(function() {
-  Meteor.typeahead.inject();
+  Meteor.typeahead.inject(".typeahead");
 })
