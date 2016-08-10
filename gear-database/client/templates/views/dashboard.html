@@ -1,0 +1,27 @@
+<template name="dashboard">
+<row>
+  <column class="dash-column">
+    <div class="dash-card section">
+      <header>
+        <h2>Recent Checkouts</h2>
+      </header>
+      {{#each checkouts}}
+        <article class="checkout-item list-item">
+          <p class="font-s1 faded float-right">
+            <span data-tooltip="{{moment dateRented ''}}">{{livestamp dateRented}}</span>
+          </p>
+          <h3><a class="inherit" href="{{pathFor route='checkout.view' id=this._id}}">{{username this.userId}} rented {{gearRented.length}} gear items</a></h3>
+          <h4 class="faded">Due {{livestamp dateDue}}</h4>
+        </article>
+      {{/each}}
+    </div>
+  </column>
+  <column class="dash-column">
+    <div class="dash-card section"></div>
+  </column>
+  <column class="dash-column">
+    <div class="dash-card section"></div>
+  </column>
+</row>
+  
+</template>

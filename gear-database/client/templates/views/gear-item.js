@@ -1,5 +1,3 @@
-var ERRORS_KEY = 'gearErrors';
-
 // A gear item is an interactive UI component for any peice of equipment in the database
 
 Template.gearItem.helpers({
@@ -23,44 +21,57 @@ Template.gearItem.helpers({
   'getState': function() {
     var gearId = this._id;
     var current = Session.get('activeGear');
-    var gearState = (current === this.code) && 'edit';
+    var className = "";
+    var gearState = (Router.current().params.query.id === this.code) && 'edit';
     var isQueued = (Session.get('checkoutQueue') && Session.get('checkoutQueue')[gearId]) && 'queue';
     var isRented = (this.status && !this.status.returned) && 'rented';
     return isRented || isQueued || gearState;
-  },
-  'errorFor': function(key) {
-      return Session.get(ERRORS_KEY) && Session.get(ERRORS_KEY)[key] && 'error';
   }
 });
 
 Template.gearItem.events({
-  'click .edit-gear': function(event, template) {
+  'click .edit-gear': function(event) {
+    event.stopPropagation();
     var gearId = this._id;
     var gearCode = this.code;
-    Session.set('editing', gearId);
-    Router.go('inventory', {}, {query: `id=${gearCode}&action=edit`});
+    var path = window.location.pathname;
+    Session.set('activeGear', gearId);
+    Router.go(path + `?id=${gearCode}&action=edit`);
   },
-  'click .read-gear': function(event, template) {
+  'click .read-gear': function(event) {
+    event.stopPropagation();
     var gearId = this._id;
     var gearCode = this.code;
+    var path = window.location.pathname;
     Session.set('reading', gearId);
-    Router.go('inventory', {}, {query: `id=${gearCode}&action=info`});
+    Router.go(path + `?id=${gearCode}&action=info`);
+  },
+  'click .return-gear': function(event) {
+    event.stopPropagation();
+    var gearId = this._id;
+    var gearCode = this.code;
+    Meteor.call('returnGear', gearId, (error, result) => {
+      if (error) {
+        Notifications.error('Error', `Could not return ${gearCode}`);
+        console.log(error)
+      } else {
+        Notifications.success(`${gearCode} returned`);
+      }
+    })
   },
   'click .queue-gear': function(event) {
+    event.stopPropagation();
     addToQueue(this);
   },
 
   'click .cancel-gear': function(event) {
+    event.stopPropagation();
     var gearId = this._id;
     var queue = Session.get('checkoutQueue');
     delete queue[gearId];
     Session.set('checkoutQueue', queue);
     Session.set(gearId, 'deafult');
 
-  },
-  'submit .edit-gear-form, reset .edit-gear-form': function(event) {
-    var _gearId = this.doc._id;
-    Session.set(_gearId, 'default');
   }
 });
 

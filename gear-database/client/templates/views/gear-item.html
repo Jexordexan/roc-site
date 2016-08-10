@@ -1,45 +1,49 @@
 <template name="gearItem">
-  <column class="gear-item {{getState}}" tabindex="0">
-  <row class="align-end">
-    <column class="grow">
-      <span class="gear-code queue-gear grow">
-        {{code}}
-      </span>
-      <div class="font-s1 gear-name">
-        <span class="type-bold">{{name}}</span> 
-      {{#if description}}
-        <span class="faded">— {{description}}</span>
-      {{/if}}
-      </div>
-    </column>
+  <column class="gear-item {{getState}} {{#unless is 'rented'}}clickable{{/unless}} queue-gear" tabindex="0">
+  <row class="align-center">
+    <h2 class="gear-code no-shrink">
+      {{code}}
+    </h2>
     {{#if is 'rented'}}
       <div class="gear-name">
-        <span class="boxed font-s1 faded" data-tooltip="By {{username status.rentedBy}}">RENTED</span>
+        <span class="boxed font-s1 faded" data-tooltip="By {{username status.rentedBy}}">CHECKED OUT</span>
       </div>
     {{/if}}
-    {{> starRating rating=condition max=5}}
-  </row>
-    <!-- <span class="gear-name queue-gear">{{description}}</span> -->
+    <p class="font-s2 gear-name grow">
+      <span class="type-bold">{{name}}</span> 
+    {{#if description}}
+      <span class="faded">— {{description}}</span>
+    {{/if}}
+    </p>
     <row class="icon-group">
-        <button data-tooltip="Info" class="btn-blank btn-icon read-gear open-sidebar" data-sidebar-id="rightSidebar">
+        <button data-tooltip="Info" class="btn-default btn-icon read-gear open-sidebar" data-sidebar-id="rightSidebar">
           <i class="fa fa-fw fa-info"></i>
         </button>
       {{#if currentUser}}
         {{#if is 'queue'}}
-          <button data-tooltip="Remove from queue" class="btn-blank btn-icon cancel-gear">
+          <button data-tooltip="Remove from queue" class="btn-default btn-icon cancel-gear">
             <i class="fa fa-fw fa-times"></i>
           </button>
         {{else}}
-          <button data-tooltip="Edit" class="btn-blank btn-icon edit-gear open-sidebar" data-sidebar-id="rightSidebar">
+          <button data-tooltip="Edit" class="btn-default btn-icon edit-gear open-sidebar" data-sidebar-id="rightSidebar">
             <i class="fa fa-fw fa-pencil"></i>
           </button>
+          {{#if is 'rented'}}
+            <button data-tooltip="Return item" class="btn-default btn-icon return-gear">
+              <i class="fa fa-fw fa-undo"></i>
+            </button>
+          {{/if}}
           {{#unless is 'rented'}}
-            <button data-tooltip="Add to queue" class="btn-blank btn-icon queue-gear">
+            <button data-tooltip="Add to queue" class="btn-default btn-icon queue-gear">
               <i class="fa fa-fw fa-plus"></i>
             </button>
           {{/unless}}
         {{/if}}
       {{/if}}
     </row>
+    <div data-tooltip="{{getCondition condition}}">
+      {{> starRating rating=condition max=5}}
+    </div>
+  </row>
   </column>
 </template>

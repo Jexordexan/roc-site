@@ -5,7 +5,7 @@
     </button>
     <div class="nav-logo hide-phone">
       <a href="/">
-        <img src="http://www.outing.org/images/badge_small.png" alt="">
+        <img src="images/badge_small.png" alt="">
       </a>
     </div>
   </div>
@@ -26,7 +26,6 @@
         </a>
       </ul>
     {{/dropdown}}
-    {{> roleTag}}
     <div class="button-group">
       <a href="{{pathFor 'account'}}" class="btn nav-link hide-phone">
         {{currentUser.profile.firstName}}
@@ -42,17 +41,4 @@
       Sign In
     </a>
   {{/if}}
-</template>
-
-<template name="sidebarNav">
-  <ul class="sidebar-nav">
-    <li><a href="{{pathFor 'recent'}}">Recent</a></li>
-    <li><a href="{{pathFor 'myGear'}}">My Gear</a></li>
-    <li><a href=""></a></li>
-    <li><a href=""></a></li>
-    <li><a href=""></a></li>
-    <li><a href=""></a></li>
-    <li><a href=""></a></li>
-    <li><a href=""></a></li>
-  </ul>
 </template>

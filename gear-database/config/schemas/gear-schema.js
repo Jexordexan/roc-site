@@ -24,7 +24,6 @@ Schema.GearRental = new SimpleSchema({
   }
 });
 
-
 Schema.Gear = new SimpleSchema({
   code: {
     type: String,
@@ -60,8 +59,9 @@ Schema.Gear = new SimpleSchema({
     type: Number,
     optional: true,
     label: "Condition",
+    allowedValues: [0,1,2,3,4,5],
     autoform: {
-      type: "select-radio",
+      type: "select",
       class: 'gear-condition-input',
       options: function () {
         return [
@@ -131,13 +131,6 @@ Schema.Gear = new SimpleSchema({
   },
   status: {
     type: Schema.GearRental,
-    optional: true,
-    autoform: {
-      type: 'hidden'
-    }
-  },
-  history: {
-    type: [Schema.GearRental],
     optional: true,
     autoform: {
       type: 'hidden'

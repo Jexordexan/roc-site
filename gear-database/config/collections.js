@@ -1,7 +1,6 @@
 ActivityList = new Mongo.Collection('activities');
 ActivityList.attachSchema(Schema.Activity);
 ActivityList.permit(['insert','update']).ifLoggedIn().apply();
-// Meteor.users.attachSchema(Schema.User);
 
 GearList = new Mongo.Collection('gear');
 GearList.attachSchema(Schema.Gear);
@@ -14,6 +13,11 @@ if (Meteor.isServer) {
     }
   );
 }
+
+
+History = new Mongo.Collection('history');
+History.attachSchema(Schema.Revision);
+History.permit(['insert']).ifLoggedIn().apply();
 
 Checkouts = new Mongo.Collection('checkouts');
 Checkouts.attachSchema(Schema.Checkout);

@@ -1,3 +1,5 @@
+var ERRORS_KEY = 'checkoutErrors';
+
 var dueIntervals = [
   {
     name: "Two weeks",
@@ -10,6 +12,12 @@ var dueIntervals = [
 ]
 
 Template.checkout.helpers({
+  errorMessages: function() {
+    return _.values(Session.get(ERRORS_KEY));
+  },
+  errorClass: function(key) {
+    return Session.get(ERRORS_KEY)[key] && 'error';
+  },
   'selectedGear': function() {      
     var queue = Session.get('checkoutQueue') || {};
     queue = _.values(queue);
@@ -42,11 +50,35 @@ Template.checkout.events({
   'submit #checkoutForm': function(event, template) {
     event.preventDefault();
     var userId = event.target.renterId.value;
+    var description = event.target.description.value;
     var dueInterval = parseInt(event.target.dueInterval.value);
     var notes = event.target.notes.value;
+
+    var agreement = template.$('[name=agreement]')[0].checked;
     var queue = _.values(Session.get('checkoutQueue'));
 
-    Meteor.apply('checkOut', [userId, queue, notes, dueInterval], function(error, result) {
+    // Fail if the 
+    var errors = {};
+
+    if (! userId) {
+      errors.user = 'You must select a member';
+    }
+
+    if (! description) {
+      errors.description = 'You must provide a description';
+    }
+
+    if (! agreement) {
+      errors.agreement = 'You must accept the rental agreement';
+    }
+
+    Session.set(ERRORS_KEY, errors);
+    if (_.keys(errors).length) {
+      event.stopPropagation();
+      return;
+    }
+
+    Meteor.apply('checkOut', [userId, description, queue, notes, dueInterval], function(error, result) {
       if (error) {
         console.log("error:");
         console.log(error)

@@ -6,17 +6,15 @@
 
 
 .gear-item {
-  position: relative;
-  margin: 10px;
-  cursor: pointer;
-  background: @default;
-
-  .transition(background-color .2s);
-  .border-radius(2px);
-  .flex(1 0 220px);
+  &:extend(.list-item);
+  padding: 5px;
+  
+  border-radius: 2px;
+  box-shadow: 0 1px 2px @shade2;
+  transition: background-color .2s;
+  flex: 1 0 220px;
   // max-width: 300px;
-  .box-shadow(0 1px 2px @shade2);
-  .animation(fadeIn .5s);
+  animation: fadeIn .5s;
 
   &.edit {
     box-shadow: 0 0 0 2px @edit;
@@ -39,6 +37,7 @@
 
   .icon-group {
     transition: .2s;
+    right: 60px;
     opacity: 0;
   }
   .gear-code,
@@ -51,10 +50,9 @@
 
     .type-light;
   }
-  .gear-name,
-  .gear-name-input {
+  .gear-name {
     padding: 5px 10px;
-
+    .align-center;
     .type-light;
     .ellipsized;
   }
@@ -77,9 +75,9 @@ span.highlight {
 }
 
 .icon-group {
-  position: absolute;
+  // position: absolute;
   z-index: 2;
-  top: 0;
+  // top: 0;
   right: 0;
 
   button {

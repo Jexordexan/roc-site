@@ -33,27 +33,23 @@
     max-width: 1000px;
     min-height: 300px;
     max-height: 80%;
-    margin: 30px auto;
+    margin: 30px 0;
     background: @roc-gray;
     box-shadow: @shadow5;
 
     .close-modal-button {
       .position(absolute, -40px, -40px);
+      opacity: .5;
+
+      &:hover {
+        opacity: 1;
+      }
     }
-  }
-  .modal-header {
-    padding: 10px;
-    border-bottom: 1px solid @tint1;
   }
 
   .modal-body {
     padding: 0 15px;
     .flex-grow(1);
-  }
-
-  .modal-footer {
-    padding: 10px;
-    border-top: 1px solid @tint1;
   }
 
   .modal-header, .modal-footer {

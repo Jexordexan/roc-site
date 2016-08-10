@@ -47,9 +47,11 @@ Template.inventory.events({
 var gearHooks = {
   onSuccess: function(formType, result) {
     if (formType == 'insert') {
-      Notifications.success(this.insertDoc.code, 'Successfully added!')
+      Notifications.success(this.insertDoc.code, 'Successfully added!');
+      Meteor.call('createGearRevision', this.insertDoc._id, 'Added to inventory');
     } else {
-      Notifications.success(this.currentDoc.code, 'Successfully updated!')
+      Notifications.success(this.currentDoc.code, 'Successfully updated!');
+      Meteor.call('createGearRevision', this.currentDoc._id, 'Updated');
     }
   }
 }

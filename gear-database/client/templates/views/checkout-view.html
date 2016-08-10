@@ -1,0 +1,35 @@
+<template name="checkoutView">
+  <column class="page section">
+    <header>
+      Gear Checkout{{#if description}}: {{description}}{{/if}}
+    </header>
+    <column class="content-padded">
+      <dl>
+        <dd>Rented to</dd>
+        <dt class="field big-type">{{username userId}}</dt>
+      </dl>
+      <row>
+        <dl class="grow">
+          <dd>Date rented</dd>
+          <dt class="field big-type">{{moment dateRented 'MMMM Do, YYYY'}}</dt>
+        </dl>
+        <dl class="grow">
+          <dd>Date due</dd>
+          <dt class="field big-type">{{moment dateDue 'MMMM Do, YYYY'}}</dt>
+        </dl>
+      </row>
+      <div>
+      {{#if notes}}
+        <dd>Notes</dd>
+        <dt class="field">{{notes}}</dt>
+      {{/if}}
+      </div>
+      <div class="result-list wrap justify-start">
+        <dd>Rented gear</dd>
+        {{#each gearRented}}
+          {{> gearItem}}
+        {{/each }}
+        </div>
+      </column>
+    </column>
+</template>

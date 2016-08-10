@@ -8,7 +8,7 @@
 }
 
 aside,
-article,
+section,
 footer {
   overflow: hidden;
 
@@ -16,10 +16,14 @@ footer {
   .flex-direction(column);
 
   > .content {
-    overflow-y: scroll;
-
+    overflow-y: auto;
     .flex(1);
   }
+
+  .scroll-y {
+    overflow-y: scroll;
+  }
+  
   .content-padded {
     padding: 20px;
   }
@@ -45,12 +49,10 @@ aside {
 
 .sidebar {
   background: #222;
-}
 
-.sidebar-header {
-  padding: 10px;
-  text-transform: uppercase;
-  opacity: .5;
+  header {
+    text-transform: uppercase;
+  }
 }
 
 @media screen and (max-width: @phone-width) {
@@ -62,6 +64,10 @@ aside {
   #leftSidebar {
     z-index: @sidebar-z;
     .position(fixed, @nav-height, auto, 0, 0);
+  }
+
+  #app-body {
+    display: block;
   }
 }
 
@@ -109,5 +115,20 @@ aside {
 
   .page-content {
     padding: 20px;
+  }
+}
+
+.section {
+
+  header {
+    flex-shrink: 0;
+    padding: 10px;
+    border-bottom: 1px solid @tint1;
+  }
+
+  footer {
+    flex-shrink: 0;
+    padding: 10px;
+    border-top: 1px solid @tint1;
   }
 }

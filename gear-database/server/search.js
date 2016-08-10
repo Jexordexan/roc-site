@@ -2,6 +2,7 @@ SearchSource.defineSource('gear', (searchText, options) => {
   options = options || {sort: {updated: -1}, limit: 20};
 
   if(searchText) {
+    searchText = searchText.replace(/[\|&;$%@"<>()+]/g, "");
     const terms = splitByComma(searchText);
     const matchByOrder = fuzzyMatch(terms);
     const matchBySequence = exactMatch(terms);

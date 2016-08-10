@@ -2,6 +2,10 @@ Meteor.publish('gear', function() {
   return GearList.find();
 });
 
+Meteor.publish('history', function() {
+  return History.find();
+});
+
 Meteor.publish('members', function() {
   return Meteor.users.find();
 });
