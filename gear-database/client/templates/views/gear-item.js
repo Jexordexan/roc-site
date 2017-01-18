@@ -61,26 +61,25 @@ Template.gearItem.events({
   },
   'click .queue-gear': function(event) {
     event.stopPropagation();
-    addToQueue(this);
+    if (Session.get('checkoutQueue') && Session.get('checkoutQueue')[this._id]) {
+      removeFromQueue(this);
+    } else {
+      addToQueue(this);
+    }
   },
 
   'click .cancel-gear': function(event) {
     event.stopPropagation();
-    var gearId = this._id;
-    var queue = Session.get('checkoutQueue');
-    delete queue[gearId];
-    Session.set('checkoutQueue', queue);
-    Session.set(gearId, 'deafult');
-
+    removeFromQueue(this)
   }
 });
 
 function removeFromQueue(gear) {
-  var gearId = this._id;
-    var queue = Session.get('checkoutQueue');
-    delete queue[gearId];
-    Session.set('checkoutQueue', queue);
-    Session.set(gearId, 'deafult');
+  var gearId = gear._id;
+  var queue = Session.get('checkoutQueue');
+  delete queue[gearId];
+  Session.set('checkoutQueue', queue);
+  Session.set(gearId, 'deafult');
 }
 
 function addToQueue(gear) {

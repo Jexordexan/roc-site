@@ -1,20 +1,22 @@
 <template name="gearItem">
   <column class="gear-item {{getState}} {{#unless is 'rented'}}clickable{{/unless}} queue-gear" tabindex="0">
   <row class="align-center">
-    <h2 class="gear-code no-shrink">
+    <row class="column-tablet fill-row">
+      <h2 class="gear-code no-shrink">
       {{code}}
-    </h2>
-    {{#if is 'rented'}}
-      <div class="gear-name">
-        <span class="boxed font-s1 faded" data-tooltip="By {{username status.rentedBy}}">CHECKED OUT</span>
-      </div>
-    {{/if}}
-    <p class="font-s2 gear-name grow">
-      <span class="type-bold">{{name}}</span> 
-    {{#if description}}
-      <span class="faded">— {{description}}</span>
-    {{/if}}
-    </p>
+      </h2>
+      {{#if is 'rented'}}
+        <div class="gear-name">
+          <span class="boxed font-s1 faded" data-tooltip="By {{username status.rentedBy}}">CHECKED OUT</span>
+        </div>
+      {{/if}}
+      <p class="font-s2 gear-name">
+        <span class="type-bold">{{name}}</span> 
+      {{#if description}}
+        <span class="faded">— {{description}}</span>
+      {{/if}}
+      </p>
+    </row>
     <row class="icon-group">
         <button data-tooltip="Info" class="btn-default btn-icon read-gear open-sidebar" data-sidebar-id="rightSidebar">
           <i class="fa fa-fw fa-info"></i>
@@ -41,7 +43,7 @@
         {{/if}}
       {{/if}}
     </row>
-    <div data-tooltip="{{getCondition condition}}">
+    <div class="hide-phone" data-tooltip="{{getCondition condition}}">
       {{> starRating rating=condition max=5}}
     </div>
   </row>

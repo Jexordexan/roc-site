@@ -6,7 +6,7 @@ Meteor.startup(function () {
   process.env.MAIL_URL = 'smtp://' + 
     encodeURIComponent('postmaster@sandbox688f3e1b6be948888f45fa952151c34c.mailgun.org') + ':' + 
     encodeURIComponent('08bc02783966bacac34af5eded5e71ef') + '@' + 
-    encodeURIComponent('stmp.mailgun.org') + ':' + 587;
+    encodeURIComponent('smtp.mailgun.org') + ':' + 587;
   
   // 2. Format the email
   //-- Set the from address

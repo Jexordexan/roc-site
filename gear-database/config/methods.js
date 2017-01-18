@@ -136,5 +136,19 @@ Meteor.methods({
     });
 
     Meteor.call('createGearRevision', gearId, 'Checked in');
+  },
+
+  createGearRevision: function(gearId, message, userId) {
+    let item = GearList.findOne(gearId);
+    userId = userId || this.userId
+    message = message.trim();
+
+    History.insert({
+      userId: userId,
+      itemId: item._id,
+      message: message,
+      modified: new Date(),
+      model: item
+    })
   }
 });

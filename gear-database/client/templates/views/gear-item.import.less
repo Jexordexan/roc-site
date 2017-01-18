@@ -7,9 +7,9 @@
 
 .gear-item {
   &:extend(.list-item);
-  padding: 5px;
+  padding: .5rem;
   
-  border-radius: 2px;
+  border-radius: 3px;
   box-shadow: 0 1px 2px @shade2;
   transition: background-color .2s;
   flex: 1 0 220px;
@@ -21,10 +21,17 @@
   }
   &.queue {
     background: @queue;
+    background: -moz-linear-gradient(top,  lighten(@queue , 5%) 0%, @queue 100%); /* FF3.6-15 */
+    background: linear-gradient(to bottom,  lighten(@queue , 5%) 0%, @queue 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   }
   &.rented {
     cursor: default;
     background: fade(@read, 25%);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 1px @queue;
   }
 
   &:hover .icon-group,
@@ -38,12 +45,11 @@
   .icon-group {
     transition: .2s;
     right: 60px;
-    opacity: 0;
   }
   .gear-code,
   .gear-code-input {
-    padding: 5px 10px;
-    font-size: 24px;
+    padding: 0 10px;
+    .font-m2;
     font-family: "Roboto Mono", monospace;
     color: white;
     background-color: transparent;
@@ -51,7 +57,7 @@
     .type-light;
   }
   .gear-name {
-    padding: 5px 10px;
+    padding: 0 10px;
     .align-center;
     .type-light;
     .ellipsized;
@@ -60,7 +66,7 @@
   .gear-description-input {
     max-width: 100%;
     padding: 10px;
-    font-size: 12px;
+    font-size: 1.2rem;
   }
 }
 
@@ -83,5 +89,11 @@ span.highlight {
   button {
     margin: 0;
     color: white;
+  }
+}
+
+@media screen and (min-width: @tablet-width) {
+  .icon-group {
+    opacity: 0;
   }
 }

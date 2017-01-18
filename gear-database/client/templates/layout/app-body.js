@@ -25,7 +25,7 @@ Template.ApplicationLayout.events({
     event.target.value = newVal;
   },
 
-  'click button.modal': function(event, template) {
+  'click button.modal-trigger': function(event, template) {
     var name = template.$(event.currentTarget).data('modal-template');
     Session.set('activeModal', name);
   },

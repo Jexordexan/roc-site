@@ -4,33 +4,36 @@
 }
 
 @body-bg: #1A1A1A;
-::-webkit-scrollbar {
-  width: 12px;
-  min-width: 12px;
-  max-width: 12px;
-  height: 12px;
-  min-height: 12px;
-  max-height: 12px;
-  background-color: @body-bg;
-}
 
-::-webkit-scrollbar-thumb {
-  border: solid 3px @body-bg;
-  border-radius: 100px;
-  background: @tint1;
-}
+@media screen and (min-width: @tablet-width) {
+  ::-webkit-scrollbar {
+    width: 12px;
+    min-width: 12px;
+    max-width: 12px;
+    height: 12px;
+    min-height: 12px;
+    max-height: 12px;
+    background-color: @body-bg;
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, .2);
-}
+  ::-webkit-scrollbar-thumb {
+    border: solid 3px @body-bg;
+    border-radius: 100px;
+    background: @tint1;
+  }
 
-::-webkit-scrollbar-thumb:active {
-  background: rgba(255, 255, 255, .2);
-}
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, .2);
+  }
 
-::-webkit-scrollbar-button {
-  display: none;
-  height: 0;
+  ::-webkit-scrollbar-thumb:active {
+    background: rgba(255, 255, 255, .2);
+  }
+
+  ::-webkit-scrollbar-button {
+    display: none;
+    height: 0;
+  }
 }
 
 body,
@@ -214,6 +217,19 @@ img {
 
 .hide-all {
   display: none !important;
+}
+
+.text-primary {
+  color: @roc-forest !important;
+}
+.text-success {
+  color: @roc-green !important;
+}
+.text-info {
+  color: @roc-blue !important;
+}
+.text-error {
+  color: @roc-red !important;
 }
 
 @media screen and (max-width: @tablet-width){

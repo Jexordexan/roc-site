@@ -28,8 +28,13 @@ Template.checkout.helpers({
   },
   'members': function() {
     return Members.find().fetch().map(function(m) {
-      let name = m.profile.firstName + " " + m.profile.lastName;
-      return {id: m._id, value: name};
+      let val = "";
+      if (m.profile) {
+        val =  m.profile.firstName + " " + m.profile.lastName;
+      } else {
+        val =  m.emails[0].address;
+      }
+      return {id: m.id, value: val};
     });
   },
   'autocomplete': (event, suggestion, datasetName) => {

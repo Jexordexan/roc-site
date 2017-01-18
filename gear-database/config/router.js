@@ -37,7 +37,7 @@ Router.configure({
     ];
   },
   onAfterAction: function() {
-    closeSidebars('both');
+    closeSidebars('right');
     this.params.query.search && Session.set('searchText', this.params.query.search);
     this.params.query.mode && Session.set('activeFilter', this.params.query.mode);
     Session.set('resultFilter', this.params.query.show || 'gear');
@@ -91,7 +91,7 @@ Router.route('/', function () {
 },{name: 'home'});
 
 Router.route('/signin', function () {
-  Session.set('activeModal', 'signInUp');
+  this.render('signInUp');
 },{name: 'signIn'});
 
 Router.route('/loading', function () {
@@ -116,7 +116,6 @@ Router.route('/checkout/:id', function () {
 
 Router.route('/account', function () {
   this.render('editUser');
-  this.layout('NoSidebarLayout');
 });
 
 Router.route('/account/:id', function () {

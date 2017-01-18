@@ -1,14 +1,16 @@
 <template name="checkoutView">
   <column class="page section">
     <header>
-      Gear Checkout{{#if description}}: {{description}}{{/if}}
+      <h1>Gear Checkout{{#if description}}: {{description}}{{/if}}</h1>
     </header>
     <column class="content-padded">
       <dl>
         <dd>Rented to</dd>
         <dt class="field big-type">{{username userId}}</dt>
+        <dd>Description</dd>
+        <dt class="field big-type">{{#if description}}: {{description}} {{else}} <i class="faded">none</i> {{/if}}</dt>
       </dl>
-      <row>
+      <row class="column-phone">
         <dl class="grow">
           <dd>Date rented</dd>
           <dt class="field big-type">{{moment dateRented 'MMMM Do, YYYY'}}</dt>
@@ -26,10 +28,16 @@
       </div>
       <div class="result-list wrap justify-start">
         <dd>Rented gear</dd>
-        {{#each gearRented}}
+        {{#each gear}}
           {{> gearItem}}
         {{/each }}
         </div>
       </column>
+      <footer>
+        <div class="row">
+          <button class="pin-right btn-clear text-error">Delete</button>
+          <button class="btn-info">Edit</button>
+        </div>
+      </footer>
     </column>
 </template>

@@ -1,6 +1,6 @@
 <template name="queue">
-<column class="checkout-queue {{#unless queue}}hide-all{{/unless}}">
-  <row class="gear-list wrap">
+<row class="checkout-queue wrap {{#unless queue}}hide-all{{/unless}}">
+  <row class="gear-list">
     {{#each queue}}
       <row class="gear-item queue">
         <span class="gear-code">{{code}}</span>
@@ -11,18 +11,18 @@
         </row>
       </row>
     {{/each}}
-    <row class="grow no-shrink">
-      <form id="quick-add" class="row">
-        <input type="text" name="codeInput" id="quick-add-input" class="gear-code-input typeahead" placeholder="+ Quick add" data-source="codes" autocomplete="off"/>
-        <input class="hide-all" type="submit"/>
-      </form>
-      <button class="btn pin-right clear-queue">
-        Cancel
-      </button>
-      <a class="btn-primary checkout-gear" href="{{pathFor route='checkout'}}">
-        Check out <i class="fa fa-fw fa-sign-out"></i>
-      </a>
-    </row>
   </row>
-</column>
+  <row class="grow no-shrink">
+    <form id="quick-add" class="row">
+      <input type="text" name="codeInput" id="quick-add-input" class="gear-code-input typeahead" placeholder="+ Quick add" data-source="codes" autocomplete="off" size="12"/>
+      <input class="hide-all" type="submit"/>
+    </form>
+    <button class="btn pin-right clear-queue">
+      Cancel
+    </button>
+    <button class="btn-primary checkout-gear modal-trigger" data-modal-template="checkout">
+      Check out <i class="fa fa-fw fa-sign-out"></i>
+    </button>
+  </row>
+</row>
 </template>
