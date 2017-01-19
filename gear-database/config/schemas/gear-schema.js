@@ -132,6 +132,7 @@ Schema.Gear = new SimpleSchema({
   status: {
     type: Schema.GearRental,
     optional: true,
+    defaultValue: null,
     autoform: {
       type: 'hidden'
     }

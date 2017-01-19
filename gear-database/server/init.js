@@ -688,7 +688,7 @@ var gearData = [
     "condition":"4"
   },
   {
-    "code":"CN-PF",
+    "code":"CN-PF-02",
     "name":"PFD",
     "description":"Red and Black, Large/Extra Large",
     "created":"8/20/2013",
@@ -1544,7 +1544,7 @@ var gearData = [
     "condition":"4"
   },
   {
-    "code":"CV-PL-O3",
+    "code":"CV-PL-03",
     "name":"Pulley",
     "description":"Red",
     "created":"8/20/2013",
@@ -1760,7 +1760,7 @@ var gearData = [
     "condition":"5"
   },
   {
-    "code":"CV-SH-O4",
+    "code":"CV-SH-04",
     "name":"Caving Harness",
     "description":"Red",
     "created":"8/20/2013",
@@ -2608,7 +2608,7 @@ var gearData = [
     "condition":"4"
   },
   {
-    "code":"KA-AB-O2",
+    "code":"KA-AB-02",
     "name":"Air Bag",
     "description":"air bag",
     "created":"9/5/2013",
@@ -3880,7 +3880,7 @@ var gearData = [
     "condition":"5"
   },
   {
-    "code":"PT-GP-1",
+    "code":"PT-GP-01",
     "name":"Go Pro",
     "description":"Water Proof Case, assorted straps and accessories",
     "created":"8/29/2013",
@@ -6528,7 +6528,7 @@ var gearData = [
     "condition":"3"
   },
   {
-    "code":"XC-PL-C4",
+    "code":"XC-PL-04",
     "name":"xc poles",
     "description":"150cm poles",
     "created":"3/4/2014",
@@ -6536,7 +6536,7 @@ var gearData = [
     "condition":"4"
   },
   {
-    "code":"XC-PL-C5",
+    "code":"XC-PL-05",
     "name":"xc poles",
     "description":"150cm",
     "created":"3/4/2014",
@@ -6544,7 +6544,7 @@ var gearData = [
     "condition":"4"
   },
   {
-    "code":"XC-PL-D2",
+    "code":"XC-PL-02",
     "name":"xc poles",
     "description":"",
     "created":"3/4/2014",
@@ -6552,7 +6552,7 @@ var gearData = [
     "condition":"4"
   },
   {
-    "code":"XC-PL-D3",
+    "code":"XC-PL-03",
     "name":"xc poles",
     "description":"",
     "created":"3/4/2014",
